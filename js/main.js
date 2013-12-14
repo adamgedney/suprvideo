@@ -1,10 +1,3 @@
-//@codekit-prepend "jquery-1.10.2.min.js"
-//@codekit-prepend "handlebars-v1.1.2.js"
-//@codekit-prepend "lightbox-2.6.min.js"
-
-
-
-//namespace
 $(function(){
 
 
@@ -14,6 +7,37 @@ $(function(){
 
 
 
+//-----------Description & download show/hide handler-----------
+$('.dl-list').hide();
+$('.desc').hide();
+
+var dl_toggle = true;
+var info_toggle = true;
+$(document).on('click', '#dl-btn', function(e){
+	
+	if(dl_toggle){
+		$('.dl-list').show();
+		dl_toggle = false;
+	}else{
+		$('.dl-list').fadeOut(1000);
+		dl_toggle = true;
+	};
+	
+	e.preventDefault();
+});
+
+$(document).on('click', '#info-btn', function(e){
+	
+	if(info_toggle){
+		$('.desc').show();
+		info_toggle = false;
+	}else{
+		$('.desc').fadeOut(1000);
+		info_toggle = true;
+	};
+	
+	e.preventDefault();
+});
 
 
 
@@ -21,6 +45,109 @@ $(function(){
 
 
 
+
+
+//--------------Video Controls Handler-----------------
+// source: http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos    
+window.onload = function() {
+
+
+
+//note: JQuery does not work on video element selectors.
+// Video
+var video = document.getElementById("video");
+
+// Buttons
+var playButton = document.getElementById("play-pause");
+var muteButton = document.getElementById("mute");
+var fullScreenButton = document.getElementById("full-screen");
+
+// Sliders
+var seekBar = document.getElementById("seek-bar");
+var volumeBar = document.getElementById("volume-bar");
+
+
+
+// Event listener for the play/pause button
+playButton.addEventListener("click", function() {
+
+  if (video.paused == true) {
+    // Play the video
+    video.play();
+
+    // Update the button text to 'Pause'
+     $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
+  } else {
+
+    // Pause the video
+    video.pause();
+
+    // Update the button text to 'Play'
+    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
+  }
+});
+
+
+
+
+
+
+
+//Event listener for video element play/pause control
+$(document).on('click', '#video', function() {
+
+  if (video.paused == true) {
+    // Play the video
+    video.play();
+
+    // Update the button text to 'Pause'
+     $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
+  } else {
+
+    // Pause the video
+    video.pause();
+
+    // Update the button text to 'Play'
+    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
+  }
+});
+
+
+
+
+
+
+
+
+// Event listener for the seek bar
+seekBar.addEventListener("change", function() {
+  
+  // Calculate the new time
+  var time = video.duration * (seekBar.value / 100);
+
+  // Update the video time
+  video.currentTime = time;
+});
+
+}// onload
+
+
+
+//-----------------Mousemove fadein/fadeout footer handler-------------------------
+
+$(window).mousemove(function(){
+
+	$('footer').show();
+
+	//runs fade out funciton
+	// setTimeout(fadeOutFooter, 4000);
+});
+
+function fadeOutFooter(){
+
+	$('footer').fadeOut(1000);
+	
+};
 
 
 
