@@ -129,28 +129,72 @@ seekBar.addEventListener("change", function() {
   video.currentTime = time;
 });
 
+
+
+// console.log(video.currentTime);
+
+// //horizontal scroll scrubbing
+// $(window).scroll(function(e){
+       
+//         // Calculate the new time
+
+//   if($(this).scrollLeft()){
+//   	var time = video.duration * ($(this).scrollLeft() * 10);
+//   }else if($(this).scrollRight()){
+//   	var time = video.duration * ($(this).scrollRight() * -10);
+//   };
+  
+
+//   // Update the video time
+//   video.currentTime = time;
+
+
+
+//         // if($(this).scrollLeft()>500)
+//         // {
+        
+//         //     $("#label").show();
+//         // }
+//         // else
+//         // {
+//         //     $("#label").hide();
+//         // }
+//     });
+
+
+
+
+
 }// onload
 
 
 
 //-----------------Mousemove fadein/fadeout footer handler-------------------------
 
-$(window).mousemove(function(){
+// $(document).on('mousemove', function(){
 
-	$('footer').show();
+// 	$('footer').stop().animate({opacity:0});
+// 	$('#add-vid-button').stop().animate({opacity:0});
 
-	//runs fade out funciton
-	// setTimeout(fadeOutFooter, 4000);
-});
+// 	$('footer').animate({opacity:1});
+// 	$('#add-vid-button').animate({opacity:1});
 
-function fadeOutFooter(){
+// 	//runs fade out function
+// 	// setTimeout(fadeOutFooter, 2000);
+// });
 
-	$('footer').fadeOut(1000);
+// function fadeOutFooter(){
+
+// 	$('footer').animate({opacity:0});
+// 	$('#add-vid-button').animate({opacity:0});
 	
-};
+// };
 
 
-
+// $(window).mouseover('footer', function(){
+// 	$('footer').show();
+// 	$('#add-vid-button').show();
+// });
 
 
 

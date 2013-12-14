@@ -40,12 +40,13 @@ $dark-red: #490406;
 
 video{
 	width: 100%;
-	// height:100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -9999;
 	overflow: hidden;
+	position: fixed;
+  	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -1000;
 }
 
 #add-vid-button{
@@ -64,6 +65,7 @@ video{
 	right: 44%;
 	width: 150px;
 	text-align: center;
+	text-shadow: 1px 1px 1px $dark-grey;
 	outline: none;
 }
 
@@ -83,10 +85,17 @@ video{
 	margin-top: -318px;// forces container over video
 	display: inline-block;
 	z-index: 100;
+	padding: 18px;
 }
 
 .dl-list{
-	
+	ul{
+		border-top: 1px solid $white;
+
+		li{
+			border-bottom: 1px solid $white;
+		}
+	}
 }
 
 .dl-list:after, .desc:after{
@@ -103,7 +112,11 @@ video{
 }
 
 .desc{
-
+	p{
+		border-top: 1px solid $white;
+		padding-top: 24px;
+		line-height: 1.2em
+	}
 }
 
 .desc:after{
