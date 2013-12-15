@@ -13,35 +13,80 @@ $('.desc').hide();
 
 var dl_toggle = true;
 var info_toggle = true;
+
 $(document).on('click', '#dl-btn', function(e){
 	
 	if(dl_toggle){
+
 		$('.dl-list').show();
 		dl_toggle = false;
+
+		$('.desc').fadeOut(1000);
 	}else{
+
 		$('.dl-list').fadeOut(1000);
 		dl_toggle = true;
+
+		$('.desc').fadeOut(1000);
 	};
 	
 	e.preventDefault();
 });
+
+$(document).on('click', '.close-list-x', function(e){
+	$('.dl-list').fadeOut(1000);
+	dl_toggle = true;
+
+	$('.desc').fadeOut(1000);
+});
+
+
+
+
+
+
 
 $(document).on('click', '#info-btn', function(e){
 	
 	if(info_toggle){
+	
 		$('.desc').show();
 		info_toggle = false;
+		$('.dl-list').fadeOut(1000);
 	}else{
+
 		$('.desc').fadeOut(1000);
 		info_toggle = true;
+		$('.dl-list').fadeOut(1000);
 	};
 	
 	e.preventDefault();
 });
 
+$(document).on('click', '.close-desc-x', function(e){
+	$('.desc').fadeOut(1000);
+	info_toggle = true;
+	$('.dl-list').fadeOut(1000);
+});
 
 
 
+//---------form show/hide handler-----------------
+
+$('.form-wrapper').hide();
+
+
+$(document).on('click', '#add-vid-button', function(e){
+
+	$('#add-vid-button').hide();
+	$('.form-wrapper').show();
+});
+
+$(document).on('click', '.close-modal-x', function(e){
+
+	$('#add-vid-button').show();
+	$('.form-wrapper').hide();
+});
 
 
 
