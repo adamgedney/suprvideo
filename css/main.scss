@@ -100,7 +100,8 @@ video{
 		display: block;
 		margin: 9px auto 0;
 		outline: none;
-
+		font-size: 1.8em;
+		font-weight: 100;
 	}
 }
 
@@ -247,12 +248,14 @@ footer{
 /*style the range sliders*/
 input[type=range]{
 	-webkit-appearance: none;
-	height: 2px;
+	appearance: none;
+	height: 1px;
 	width: 250px;
 	margin-bottom: 40px;
 	vertical-align: middle;
-	background: $dark-grey;
-	border-bottom: 1px solid $white;
+	background: $black;
+	// border-top: 1px solid $white;
+	opacity: .5;
 	outline: none;
 }
 
@@ -262,7 +265,7 @@ input[type='range']::-webkit-slider-thumb {
     width: 14px;  
     height: 14px; 
     border-radius: 20px; 
-    border: 2px solid $grey; 
+    border: 1px solid $white; 
 }  
 
 

@@ -11,6 +11,9 @@ $(function(){
 $('.dl-list').hide();
 $('.desc').hide();
 
+
+
+
 var dl_toggle = true;
 var info_toggle = true;
 
@@ -33,12 +36,16 @@ $(document).on('click', '#dl-btn', function(e){
 	e.preventDefault();
 });
 
+
+
+
 $(document).on('click', '.close-list-x', function(e){
 	$('.dl-list').fadeOut(1000);
 	dl_toggle = true;
 
 	$('.desc').fadeOut(1000);
 });
+
 
 
 
@@ -63,11 +70,20 @@ $(document).on('click', '#info-btn', function(e){
 	e.preventDefault();
 });
 
+
+
+
 $(document).on('click', '.close-desc-x', function(e){
 	$('.desc').fadeOut(1000);
 	info_toggle = true;
 	$('.dl-list').fadeOut(1000);
 });
+
+
+
+
+
+
 
 
 
@@ -92,45 +108,48 @@ $(document).on('click', '.close-modal-x', function(e){
 
 
 
+
+
+
+
 //--------------Video Controls Handler-----------------
 // source: http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos    
 window.onload = function() {
 
+	//note: JQuery does not work on video element selectors.
+	// Video
+	var video = document.getElementById("video");
 
+	// Buttons
+	var playButton = document.getElementById("play-pause");
+	var muteButton = document.getElementById("mute");
+	var fullScreenButton = document.getElementById("full-screen");
 
-//note: JQuery does not work on video element selectors.
-// Video
-var video = document.getElementById("video");
-
-// Buttons
-var playButton = document.getElementById("play-pause");
-var muteButton = document.getElementById("mute");
-var fullScreenButton = document.getElementById("full-screen");
-
-// Sliders
-var seekBar = document.getElementById("seek-bar");
-var volumeBar = document.getElementById("volume-bar");
+	// Sliders
+	var seekBar = document.getElementById("seek-bar");
+	var volumeBar = document.getElementById("volume-bar");
 
 
 
-// Event listener for the play/pause button
-playButton.addEventListener("click", function() {
+	// Event listener for the play/pause button
+	playButton.addEventListener("click", function() {
 
-  if (video.paused == true) {
-    // Play the video
-    video.play();
+	  if (video.paused == true) {
+	    // Play the video
+	    video.play();
 
-    // Update the button text to 'Pause'
-     $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
-  } else {
+	    // Update the button text to 'Pause'
+	     $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
+	  } else {
 
-    // Pause the video
-    video.pause();
+	    // Pause the video
+	    video.pause();
 
-    // Update the button text to 'Play'
-    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
-  }
+	    // Update the button text to 'Play'
+	    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
+	  }
 });
+
 
 
 
@@ -174,6 +193,38 @@ seekBar.addEventListener("change", function() {
   video.currentTime = time;
 });
 
+
+
+
+
+
+
+
+//Displays video's current time in transport window
+//updates seek bar
+//and handles switching to replay button
+//****NOTE: tweak the running of this function.
+timeDisplay();
+function timeDisplay(){
+
+	var pos = "00:" + Math.floor(video.currentTime);
+
+	//upon video end, changes play button to a replay button
+	if(video.ended){
+		// Update the button button to 'replay'
+	    $('#play-pause').css('background', 'url(images/replay.png) no-repeat');
+
+	};
+
+
+	if(video.playbackRate > 0){
+
+		$('#time-display').html(pos);
+		seekBar.value = Math.floor(video.currentTime) * 3.25;
+
+		setTimeout(timeDisplay, 100);
+	};
+};
 
 
 // console.log(video.currentTime);
@@ -243,7 +294,7 @@ seekBar.addEventListener("change", function() {
 
 
 
-//-------------------------------------------Validate contact form---------------------------------
+//-------------------------------------------Validate form---------------------------------
 $('#submit-btn').on("click", function(e){
 
 	var email = $('#con-email').val();
@@ -272,7 +323,7 @@ $('#submit-btn').on("click", function(e){
 		return "true";
 	}
 
-});// Validate Contact
+});// Validate
 
 
 

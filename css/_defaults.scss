@@ -48,8 +48,14 @@ p{
 	color: $light-grey;
 }
 
+button, input{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
 input{
 -webkit-font-smoothing: antialiased;
+font-size: 1.6em;
+padding: 3px;
 }
 
 input[type=submit]{
