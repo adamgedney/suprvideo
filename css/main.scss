@@ -49,15 +49,14 @@ video{
 	z-index: -1000;
 }
 
-#add-vid-button{
-	background: none;
-	appearance: none;
-	-webkit-appearance: none;
-	border: none;
+#site-container{
+
+}
+
+#vid-button{ 
 	color: $white;
 	font-size: 2.1em;
 	font-weight: 100;
-
 	display: inline-block;
 	position: absolute;
 	bottom: 105px;
@@ -68,6 +67,7 @@ video{
 	text-shadow: 1px 1px 1px $dark-grey;
 	outline: none;
 }
+
 
 .form-wrapper{
 	width: 300px;
@@ -211,6 +211,7 @@ footer{
 
 .footer-inner{
 	overflow: hidden;
+	height: 100%;
 }
 
 #video-controls{
@@ -317,7 +318,6 @@ input[type='range']::-webkit-slider-thumb {
 
 .shots{
 	display: inline-block;
-	
 	text-align: center;
 	float: right;
 

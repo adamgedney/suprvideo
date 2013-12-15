@@ -14,11 +14,13 @@ $.get('/templates/template.html', function(htmlArg){
 	var template = Handlebars.compile(source);
 	$('#bg-container').append(template);
 
-
 	//----loads site----
 	var siteSource = $(htmlArg).find('#site').html();
 	var siteTemplate = Handlebars.compile(siteSource);
 	$('#site-container').append(siteTemplate);
+
+	// setTimeout(init, 100);
+
 
 
 	//initializes hide on all show/hide behaviors
@@ -108,15 +110,15 @@ $(document).on('click', '.close-desc-x', function(e){
 //---------form show/hide handler-----------------
 
 
-$(document).on('click', '#add-vid-button', function(e){
+$(document).on('click', '#vid-button', function(e){
 
-	$('#add-vid-button').hide();
+	$('#vid-button').hide();
 	$('.form-wrapper').show();
 });
 
 $(document).on('click', '.close-modal-x', function(e){
 
-	$('#add-vid-button').show();
+	$('#vid-button').show();
 	$('.form-wrapper').hide();
 });
 
@@ -286,10 +288,10 @@ function timeDisplay(){
 // $(document).on('mousemove', function(){
 
 // 	$('footer').stop().animate({opacity:0});
-// 	$('#add-vid-button').stop().animate({opacity:0});
+// 	$('#vid-button').stop().animate({opacity:0});
 
 // 	$('footer').animate({opacity:1});
-// 	$('#add-vid-button').animate({opacity:1});
+// 	$('#vid-button').animate({opacity:1});
 
 // 	//runs fade out function
 // 	// setTimeout(fadeOutFooter, 2000);
@@ -298,14 +300,14 @@ function timeDisplay(){
 // function fadeOutFooter(){
 
 // 	$('footer').animate({opacity:0});
-// 	$('#add-vid-button').animate({opacity:0});
+// 	$('#vid-button').animate({opacity:0});
 	
 // };
 
 
 // $(window).mouseover('footer', function(){
 // 	$('footer').show();
-// 	$('#add-vid-button').show();
+// 	$('#vid-button').show();
 // });
 
 
