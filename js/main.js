@@ -4,16 +4,34 @@ $(function(){
 
 
 
+//-----------templating---------------
+//This $.get closes just before namespace close at end of file
+//acts as a window.onload for the rest of the program
+$.get('/templates/template.html', function(htmlArg){
+
+	//----loads bg video----
+	var source = $(htmlArg).find('#bg-video').html();
+	var template = Handlebars.compile(source);
+	$('#bg-container').append(template);
+
+
+	//----loads site----
+	var siteSource = $(htmlArg).find('#site').html();
+	var siteTemplate = Handlebars.compile(siteSource);
+	$('#site-container').append(siteTemplate);
+
+
+	//initializes hide on all show/hide behaviors
+	$('.dl-list').hide();
+	$('.desc').hide();
+	$('.form-wrapper').hide();
+
+
+
 
 
 
 //-----------Description & download show/hide handler-----------
-$('.dl-list').hide();
-$('.desc').hide();
-
-
-
-
 var dl_toggle = true;
 var info_toggle = true;
 
@@ -89,8 +107,6 @@ $(document).on('click', '.close-desc-x', function(e){
 
 //---------form show/hide handler-----------------
 
-$('.form-wrapper').hide();
-
 
 $(document).on('click', '#add-vid-button', function(e){
 
@@ -114,7 +130,7 @@ $(document).on('click', '.close-modal-x', function(e){
 
 //--------------Video Controls Handler-----------------
 // source: http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos    
-window.onload = function() {
+// window.onload = function() {
 
 	//note: JQuery does not work on video element selectors.
 	// Video
@@ -148,7 +164,7 @@ window.onload = function() {
 	    // Update the button text to 'Play'
 	    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
 	  }
-});
+	});
 
 
 
@@ -261,7 +277,7 @@ function timeDisplay(){
 
 
 
-}// onload
+// }// onload
 
 
 
@@ -338,6 +354,6 @@ $('#submit-btn').on("click", function(e){
 
 
 
-
+});//get
 
 });// function
