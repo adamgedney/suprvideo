@@ -33,6 +33,46 @@ $.get('/templates/template.html', function(htmlArg){
 
 
 
+//get and load all videos upon program init
+$.ajax({
+	url: '/controllers/get_videos.php',
+	type: 'get',
+	dataType: 'json',
+	success: function(response){
+
+	var vids = response.videos
+
+	//loops through screenshots to grab the first shot from each DB video
+	//to be used as a thumbnail for main navigation
+	var lng = vids.length;
+	for(var i=0; i < lng; i++){
+		var img = '<img id="' + vids[i].id +'" src="' + vids[i].shot_1 + '" alt="videos stored">';
+		$('#clips').append(img);
+	};
+
+	
+		//templating
+		// var source = $(htmlArg).find('#bg-video').html();
+		// var template = Handlebars.compile(source);
+		// var context = {id: vids.id, path:vids.path};
+		// var html = template(context);
+
+		// $('#bg-container').append(html);
+
+
+				
+	}
+});// ajax
+
+
+
+
+
+
+
+
+
+
 //-----------Description & download show/hide handler-----------
 var dl_toggle = true;
 var info_toggle = true;
@@ -221,11 +261,19 @@ seekBar.addEventListener("change", function() {
 //Displays video's current time in transport window
 //updates seek bar
 //and handles switching to replay button
-//****NOTE: tweak the running of this function.
+//****NOTE: tweak the running of the replay portion of this function.
 timeDisplay();
 function timeDisplay(){
 
-	var pos = "00:" + Math.floor(video.currentTime);
+	var curTime = Math.floor(video.currentTime).toString();
+
+	var pos = "";
+
+	if(curTime.length < 2){
+		pos = "00:0" + Math.floor(video.currentTime);
+	}else{
+		pos = "00:" + Math.floor(video.currentTime);
+	}
 
 	//upon video end, changes play button to a replay button
 	if(video.ended){
