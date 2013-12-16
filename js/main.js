@@ -68,7 +68,7 @@ $.ajax({
 	$('#bg-container').append(bg_init);
 
 	//loads video control and functions once first video has been added to DOM
-	init();
+	video_init();
 
 
 	}//success
@@ -89,54 +89,17 @@ $.ajax({
 
 
 //--------------Video Controls Handler-----------------
-function init(){
+function video_init(){
 
 	
-// source: http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos    
+// inspiration: http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos    
 
-	//note: JQuery does not work on video element selectors.
-	// Video
-	var video = document.getElementById("video");
+// Video
+var video = document.getElementById("video");
+var seekBar = document.getElementById("seek-bar");
 
-	// Buttons
-	var playButton = document.getElementById("play-pause");
-	var muteButton = document.getElementById("mute");
-	var fullScreenButton = document.getElementById("full-screen");
-
-	// Sliders
-	var seekBar = document.getElementById("seek-bar");
-	var volumeBar = document.getElementById("volume-bar");
-
-
-
-	// Event listener for the play/pause button
-	playButton.addEventListener("click", function() {
-
-	  if (video.paused == true) {
-	    // Play the video
-	    video.play();
-
-	    // Update the button text to 'Pause'
-	     $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
-	  } else {
-
-	    // Pause the video
-	    video.pause();
-
-	    // Update the button text to 'Play'
-	    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
-	  }
-	});
-
-
-
-
-
-
-
-
-//Event listener for video element play/pause control
-$(document).on('click', '#video', function() {
+// Event listener for the play/pause button
+$(document).on('click', '#play-pause', function(){
 
   if (video.paused == true) {
     // Play the video
@@ -152,7 +115,36 @@ $(document).on('click', '#video', function() {
     // Update the button text to 'Play'
     $('#play-pause').css('background', 'url(images/play.png) no-repeat');
   }
-});
+});// listener playButton
+
+
+
+
+
+
+
+
+//Event listener for video element play/pause control
+$(document).on('click', '#video', function() {
+
+  if (video.paused == true) {
+    // Play the video
+    video.play();
+
+    //calls the time display to start running
+    timeDisplay();
+
+    // Update the button text to 'Pause'
+     $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
+  } else {
+
+    // Pause the video
+    video.pause();
+
+    // Update the button text to 'Play'
+    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
+  }
+});// onCLick #video
 
 
 
@@ -163,13 +155,14 @@ $(document).on('click', '#video', function() {
 
 // Event listener for the seek bar
 seekBar.addEventListener("change", function() {
+
   
   // Calculate the new time
   var time = video.duration * (seekBar.value / 100);
 
   // Update the video time
   video.currentTime = time;
-});
+});// seek listener
 
 
 
@@ -182,11 +175,10 @@ seekBar.addEventListener("change", function() {
 //updates seek bar
 //and handles switching to replay button
 //****NOTE: tweak the running of the replay portion of this function.
-timeDisplay();
+
 function timeDisplay(){
 
 	var curTime = Math.floor(video.currentTime).toString();
-
 	var pos = "";
 
 	if(curTime.length < 2){
@@ -210,22 +202,16 @@ function timeDisplay(){
 
 		setTimeout(timeDisplay, 100);
 	};
-};
+};// timeDisplay()
+};//*******************video_init
 
 
-
-
-
-
-
-
+	
 
 
 //click handlers for CURRENT VIDEO selection
 $(document).on('click', '.video-thumb', function(e){
-	// var id = this.id;
-
-
+	
 	$.ajax({
 		url: '../controllers/get_video.php',
 		data: {
@@ -236,7 +222,8 @@ $(document).on('click', '.video-thumb', function(e){
 		success: function(response){
 
 			var vid = response.video[0];
-console.log(vid , "This is the single video");
+
+			//empties content from containers
 			$('.shots').empty();
 			$('#desc-content').empty();
 
@@ -255,26 +242,54 @@ console.log(vid , "This is the single video");
 			$('#desc-content').append(info);
 
 
+			
+
 		}//success
 	});//ajax
 
 });//onClick .video-thumb
 
 
+//double click video to load it as BACKGROUND
+$(document).on('dblclick', '.video-thumb', function(e){
 
+	//first stops video to eliminate bug
+	var current_video = document.getElementById("video");
+	current_video.pause();
 
+	// Update the button text to 'Play'
+    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
+ 	$.ajax({
+		url: '../controllers/get_video.php',
+		data: {
+			vid_id: this.id
+		},
+		type: 'get',
+		dataType: 'json',
+		success: function(response){
 
+			var vid = response.video[0];
 
-};//*******************init
+			//empties container
+			$('#bg-container').empty();
 
+			//loads BACKGROUND VIDEO to DOM
+			var bg = '<video id="video" poster="' + vid.poster + '">';
+				bg += '<source data-video-id="' + vid.id + '" src="' + vid.video_path + '" type="video/mp4"/>';
+				bg += '<p>Sorry. Your browser doesn\'t support HTML5 video.</p>';
+				bg += '</video>';
 
-	
+			$('#bg-container').append(bg);
 
+			var new_video = document.getElementById("video");
+				new_video.load();
 
+			//reruns video_init to respecify current video bindings
+			video_init();
 
-
-
-
+		}//success
+	});//ajax
+});// dblclick
 
 
 
