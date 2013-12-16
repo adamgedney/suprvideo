@@ -3,27 +3,20 @@ $(function(){
 
 
 
-
 //-----------templating---------------
 //This $.get closes just before namespace close at end of file
 //acts as a window.onload for the rest of the program
 $.get('/templates/template.html', function(htmlArg){
 
-	//----loads bg video----
-	var source = $(htmlArg).find('#bg-video').html();
-	var template = Handlebars.compile(source);
-	$('#bg-container').append(template);
-
+	
 	//----loads site----
 	var siteSource = $(htmlArg).find('#site').html();
 	var siteTemplate = Handlebars.compile(siteSource);
 	$('#site-container').append(siteTemplate);
 
-	// setTimeout(init, 100);
-
-
 
 	//initializes hide on all show/hide behaviors
+	//once added to DOM
 	$('.dl-list').hide();
 	$('.desc').hide();
 	$('.form-wrapper').hide();
@@ -31,9 +24,7 @@ $.get('/templates/template.html', function(htmlArg){
 
 
 
-
-
-//get and load all videos upon program init
+//********get and load all videos upon program init********
 $.ajax({
 	url: '/controllers/get_videos.php',
 	type: 'get',
@@ -43,124 +34,51 @@ $.ajax({
 	var vids = response.videos
 
 	//loops through screenshots to grab the first shot from each DB video
-	//to be used as a thumbnail for main navigation
+	//to be used as a THUMBNAIL CLIP for main navigation
 	var lng = vids.length;
 	for(var i=0; i < lng; i++){
-		var img = '<img id="' + vids[i].id +'" src="' + vids[i].shot_1 + '" alt="videos stored">';
+		var img = '<img class= "video-thumb" id="' + vids[i].id +'" src="' + vids[i].shot_1 + '" alt="videos stored">';
 		$('#clips').append(img);
 	};
 
+
+
+	//loads default video SHOTS to DOM
+	var shots_init = '<a href="' + vids[0].shot_1 + '" data-lightbox="1"><img src="' + vids[0].shot_1 + '" alt="screenshot"/></a>';
+		shots_init += '<a href="' + vids[0].shot_2 + '" data-lightbox="1"><img src="' + vids[0].shot_2 + '" alt="screenshot"/></a>';
+		shots_init += '<a href="' + vids[0].shot_3 + '" data-lightbox="1"><img src="' + vids[0].shot_3 + '" alt="screenshot"/></a>';
 	
-		//templating
-		// var source = $(htmlArg).find('#bg-video').html();
-		// var template = Handlebars.compile(source);
-		// var context = {id: vids.id, path:vids.path};
-		// var html = template(context);
-
-		// $('#bg-container').append(html);
+	$('.shots').append(shots_init);
 
 
-				
-	}
+	//title & description init
+	var info_init = '<h2>' + vids[0].title + '</h2>';
+		info_init += '<p>' + vids[0].desc + '</p>';
+
+	$('#desc-content').append(info_init);
+
+							
+							
+	//first BACKGROUND VIDEO being added to DOM
+	var bg_init = '<video id="video" poster="' + vids[0].poster + '">';
+		bg_init += '<source data-video-id="' + vids[0].id + '" src="' + vids[0].video_path + '" type="video/mp4"/>';
+		bg_init += '<p>Sorry. Your browser doesn\'t support HTML5 video.</p>';
+		bg_init += '</video>';
+
+	$('#bg-container').append(bg_init);
+
+	//loads video control and functions once first video has been added to DOM
+	init();
+
+
+	}//success
 });// ajax
 
 
 
-
-
-
-
-
-
-
-//-----------Description & download show/hide handler-----------
-var dl_toggle = true;
-var info_toggle = true;
-
-$(document).on('click', '#dl-btn', function(e){
 	
-	if(dl_toggle){
-
-		$('.dl-list').show();
-		dl_toggle = false;
-
-		$('.desc').fadeOut(1000);
-	}else{
-
-		$('.dl-list').fadeOut(1000);
-		dl_toggle = true;
-
-		$('.desc').fadeOut(1000);
-	};
-	
-	e.preventDefault();
-});
 
 
-
-
-$(document).on('click', '.close-list-x', function(e){
-	$('.dl-list').fadeOut(1000);
-	dl_toggle = true;
-
-	$('.desc').fadeOut(1000);
-});
-
-
-
-
-
-
-
-
-$(document).on('click', '#info-btn', function(e){
-	
-	if(info_toggle){
-	
-		$('.desc').show();
-		info_toggle = false;
-		$('.dl-list').fadeOut(1000);
-	}else{
-
-		$('.desc').fadeOut(1000);
-		info_toggle = true;
-		$('.dl-list').fadeOut(1000);
-	};
-	
-	e.preventDefault();
-});
-
-
-
-
-$(document).on('click', '.close-desc-x', function(e){
-	$('.desc').fadeOut(1000);
-	info_toggle = true;
-	$('.dl-list').fadeOut(1000);
-});
-
-
-
-
-
-
-
-
-
-//---------form show/hide handler-----------------
-
-
-$(document).on('click', '#vid-button', function(e){
-
-	$('#vid-button').hide();
-	$('.form-wrapper').show();
-});
-
-$(document).on('click', '.close-modal-x', function(e){
-
-	$('#vid-button').show();
-	$('.form-wrapper').hide();
-});
 
 
 
@@ -171,8 +89,10 @@ $(document).on('click', '.close-modal-x', function(e){
 
 
 //--------------Video Controls Handler-----------------
+function init(){
+
+	
 // source: http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos    
-// window.onload = function() {
 
 	//note: JQuery does not work on video element selectors.
 	// Video
@@ -293,41 +213,167 @@ function timeDisplay(){
 };
 
 
-// console.log(video.currentTime);
-
-// //horizontal scroll scrubbing
-// $(window).scroll(function(e){
-       
-//         // Calculate the new time
-
-//   if($(this).scrollLeft()){
-//   	var time = video.duration * ($(this).scrollLeft() * 10);
-//   }else if($(this).scrollRight()){
-//   	var time = video.duration * ($(this).scrollRight() * -10);
-//   };
-  
-
-//   // Update the video time
-//   video.currentTime = time;
-
-
-
-//         // if($(this).scrollLeft()>500)
-//         // {
-        
-//         //     $("#label").show();
-//         // }
-//         // else
-//         // {
-//         //     $("#label").hide();
-//         // }
-//     });
 
 
 
 
 
-// }// onload
+
+
+
+//click handlers for CURRENT VIDEO selection
+$(document).on('click', '.video-thumb', function(e){
+	// var id = this.id;
+
+
+	$.ajax({
+		url: '../controllers/get_video.php',
+		data: {
+			vid_id: this.id
+		},
+		type: 'get',
+		dataType: 'json',
+		success: function(response){
+
+			var vid = response.video[0];
+console.log(vid , "This is the single video");
+			$('.shots').empty();
+			$('#desc-content').empty();
+
+			//loads video SHOTS to DOM
+			var shots = '<a href="' + vid.shot_1 + '" data-lightbox="1"><img src="' + vid.shot_1 + '" alt="screenshot"/></a>';
+				shots += '<a href="' + vid.shot_2 + '" data-lightbox="1"><img src="' + vid.shot_2 + '" alt="screenshot"/></a>';
+				shots += '<a href="' + vid.shot_3 + '" data-lightbox="1"><img src="' + vid.shot_3 + '" alt="screenshot"/></a>';
+			
+			$('.shots').append(shots);
+
+
+			//loads title & description to DOM
+			var info = '<h2>' + vid.title + '</h2>';
+				info += '<p>' + vid.desc + '</p>';
+
+			$('#desc-content').append(info);
+
+
+		}//success
+	});//ajax
+
+});//onClick .video-thumb
+
+
+
+
+
+
+};//*******************init
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
+
+//-----------Description & download show/hide handler-----------
+var dl_toggle = true;
+var info_toggle = true;
+
+$(document).on('click', '#dl-btn', function(e){
+	
+	if(dl_toggle){
+
+		$('.dl-list').show();
+		dl_toggle = false;
+
+		$('.desc').fadeOut(1000);
+	}else{
+
+		$('.dl-list').fadeOut(1000);
+		dl_toggle = true;
+
+		$('.desc').fadeOut(1000);
+	};
+	
+	e.preventDefault();
+});
+
+
+
+
+$(document).on('click', '.close-list-x', function(e){
+	$('.dl-list').fadeOut(1000);
+	dl_toggle = true;
+
+	$('.desc').fadeOut(1000);
+});
+
+
+
+
+$(document).on('click', '#info-btn', function(e){
+	
+	if(info_toggle){
+	
+		$('.desc').show();
+		info_toggle = false;
+		$('.dl-list').fadeOut(1000);
+	}else{
+
+		$('.desc').fadeOut(1000);
+		info_toggle = true;
+		$('.dl-list').fadeOut(1000);
+	};
+	
+	e.preventDefault();
+});
+
+
+
+
+$(document).on('click', '.close-desc-x', function(e){
+	$('.desc').fadeOut(1000);
+	info_toggle = true;
+	$('.dl-list').fadeOut(1000);
+});
+
+
+
+
+
+
+
+
+
+//---------form show/hide handler-----------------
+
+
+$(document).on('click', '#vid-button', function(e){
+
+	$('#vid-button').hide();
+	$('.form-wrapper').show();
+});
+
+$(document).on('click', '.close-modal-x', function(e){
+
+	$('#vid-button').show();
+	$('.form-wrapper').hide();
+});
+
+
+
+
+
+
 
 
 

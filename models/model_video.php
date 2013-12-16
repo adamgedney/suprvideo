@@ -6,18 +6,33 @@ Class Model_Video{
 
 
 
-	public function get_All_Videos(){
+public function get_All_Videos(){
 
-		$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
+	$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
 
-		$st = $db->prepare("SELECT * FROM videos");
-		$st->execute();
+	$st = $db->prepare("SELECT * FROM videos");
+	$st->execute();
 
-		$obj = $st->fetchAll();
+	$obj = $st->fetchAll();
 
-		return $obj;
-	}
+	return $obj;
+}
 
+
+
+
+
+public function get_Video($vid_id){
+
+	$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
+
+	$st = $db->prepare("SELECT * FROM videos WHERE id = :vid_id");
+	$st->execute(array(":vid_id"=>$vid_id));
+
+	$obj = $st->fetchAll();
+
+	return $obj;
+}
 
 
 

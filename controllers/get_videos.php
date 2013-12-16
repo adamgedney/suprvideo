@@ -8,17 +8,11 @@
 	$model = new Model_Video();
 
 
-		//loads model to get all posts
+		//loads model to get all videos
 		$result = $model->get_All_Videos();
 
 
 		if($result){
-
-			$videos = array();
-
-			// foreach($result as $r){
-			// 	array_push($videos, $r);
-			// };
 
 			header('Content-type: application/json');
 			echo json_encode(array('videos'=>$result));
