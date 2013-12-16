@@ -60,12 +60,11 @@ $.ajax({
 							
 							
 	//first BACKGROUND VIDEO being added to DOM
-	var bg_init = '<video id="video" poster="' + vids[0].poster + '">';
-		bg_init += '<source data-video-id="' + vids[0].id + '" src="' + vids[0].video_path + '" type="video/mp4"/>';
-		bg_init += '<p>Sorry. Your browser doesn\'t support HTML5 video.</p>';
-		bg_init += '</video>';
-
-	$('#bg-container').append(bg_init);
+	//**NOTE** MUSTTTT use the .scr function in JS to make caching work properly
+	var video = document.getElementById('video');
+	$('#video').attr("poster", vids[0].poster);
+	video.src = vids[0].video_path;
+	
 
 	//loads video control and functions once first video has been added to DOM
 	video_init();
@@ -87,9 +86,9 @@ $.ajax({
 
 
 
-
 //--------------Video Controls Handler-----------------
 function video_init(){
+
 
 	
 // inspiration: http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos    
@@ -240,22 +239,16 @@ $(document).on('click', '.video-thumb', function(e){
 				info += '<p>' + vid.desc + '</p>';
 
 			$('#desc-content').append(info);
-
-
-			
-
 		}//success
 	});//ajax
-
 });//onClick .video-thumb
 
 
-//double click video to load it as BACKGROUND
-$(document).on('dblclick', '.video-thumb', function(e){
 
-	//first stops video to eliminate bug
-	var current_video = document.getElementById("video");
-	current_video.pause();
+
+
+//DOUBLE CLICK video to load it as BACKGROUND
+$(document).on('dblclick', '.video-thumb', function(e){
 
 	// Update the button text to 'Play'
     $('#play-pause').css('background', 'url(images/play.png) no-repeat');
@@ -269,23 +262,13 @@ $(document).on('dblclick', '.video-thumb', function(e){
 		success: function(response){
 
 			var vid = response.video[0];
-
-			//empties container
-			$('#bg-container').empty();
+			
+			var current_video = document.getElementById("video");
 
 			//loads BACKGROUND VIDEO to DOM
-			var bg = '<video id="video" poster="' + vid.poster + '">';
-				bg += '<source data-video-id="' + vid.id + '" src="' + vid.video_path + '" type="video/mp4"/>';
-				bg += '<p>Sorry. Your browser doesn\'t support HTML5 video.</p>';
-				bg += '</video>';
+			$('#video').attr("poster", vid.poster);
+			current_video.src = vid.video_path;
 
-			$('#bg-container').append(bg);
-
-			var new_video = document.getElementById("video");
-				new_video.load();
-
-			//reruns video_init to respecify current video bindings
-			video_init();
 
 		}//success
 	});//ajax

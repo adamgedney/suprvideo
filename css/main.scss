@@ -286,6 +286,7 @@ input[type='range']::-webkit-slider-thumb {
 	margin: 0 auto;
 
 	img{
+		max-width: 83px;
 		margin-right: 3px;
 		-webkit-transform:scale(0.7);
            -moz-transform:scale(0.7);
@@ -322,6 +323,7 @@ input[type='range']::-webkit-slider-thumb {
 	float: right;
 
 	img{
+		max-width: 83px;
 		margin-right: 3px;
 		// padding-top: 18px;
 	}
