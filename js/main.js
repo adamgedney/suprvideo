@@ -1,6 +1,7 @@
 $(function(){
 
-
+//NOTES:  
+//fix the seek bar. Makes it's max val = to the length of the video
 
 
 //-----------templating---------------
@@ -97,41 +98,44 @@ function video_init(){
 var video = document.getElementById("video");
 var seekBar = document.getElementById("seek-bar");
 
+
+
+
 // Event listener for the play/pause button
 $(document).on('click', '#play-pause', function(){
 
-  if (video.paused == true) {
-    // Play the video
-    video.play();
-
-    // Update the button text to 'Pause'
-     $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
-  } else {
-
-    // Pause the video
-    video.pause();
-
-    // Update the button text to 'Play'
-    $('#play-pause').css('background', 'url(images/play.png) no-repeat');
-  }
+	playPause(video);
+ 
 });// listener playButton
-
-
-
-
-
-
 
 
 //Event listener for video element play/pause control
 $(document).on('click', '#video', function() {
 
-  if (video.paused == true) {
+  playPause(video);
+
+});// onCLick #video
+
+
+//listens for spacebar press to toggle play/pause
+$(window).on('keypress', function(e){
+	if(e.charCode == 32){
+		playPause(video);
+	}
+});
+
+
+
+
+
+
+function playPause(video){
+	 if (video.paused == true) {
     // Play the video
     video.play();
 
-    //calls the time display to start running
-    timeDisplay();
+    //starts time display
+    timeDisplay()
 
     // Update the button text to 'Pause'
      $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
@@ -143,7 +147,9 @@ $(document).on('click', '#video', function() {
     // Update the button text to 'Play'
     $('#play-pause').css('background', 'url(images/play.png) no-repeat');
   }
-});// onCLick #video
+};
+
+
 
 
 
