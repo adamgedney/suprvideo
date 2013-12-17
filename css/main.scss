@@ -276,6 +276,7 @@ input[type='range']::-webkit-slider-thumb {
 	height: 100%;
 	width: 33%;
 	margin: 0 auto;
+	// overflow: hidden;
 	// clear: both;
 }
 
@@ -283,9 +284,13 @@ input[type='range']::-webkit-slider-thumb {
 	display: inline-block;
 	text-align: center;
 	padding-top: 6px;
-	margin: 0 auto;
+	margin: 9px auto 0;
+	width: 255px;
+	overflow: hidden;
+	white-space: nowrap;
 
 	img{
+		display: inline;
 		max-width: 83px;
 		margin-right: 3px;
 		-webkit-transform:scale(0.7);

@@ -33,14 +33,12 @@
 					<img class="close-list-x" src="images/x.png" alt="close modal icon" />
 
 					<h2>Video Downloads</h2>
-					<ul>
-						<li><a href="#"><img class="dl-list-reel" src="images/reel.png" alt="movie icon"/>Advert_1.mov<img class="dl-list-icon" src="images/cloud.png" alt="download link"/></a><li>
-						<li><a href="#"><img class="dl-list-reel" src="images/reel.png" alt="movie icon"/>Advert_1.ogg<img class="dl-list-icon" src="images/cloud.png" alt="download link"/></a><li>
-						<li><a href="#"><img class="dl-list-reel" src="images/reel.png" alt="movie icon"/>Advert_1.mp4<img class="dl-list-icon" src="images/cloud.png" alt="download link"/></a><li>
+					<ul id="file-list">
+						
 					</ul>
 
 					<h2>Audio Download</h2>
-					<p><a href="#"><img class="dl-list-reel" src="images/spkr.png" alt="audio icon"/>Advert_1.mp3<img  class="dl-list-icon"src="images/cloud.png" alt="download link"/></a></p>
+					<p id="audio-dl"></p>
 				</div><!-- /.dl-list-->
 
 
@@ -65,7 +63,7 @@
 					<!-- Video Controls -->
 					<div id="video-controls">
 						<button type="button" id="play-pause"></button>
-						<input type="range" id="seek-bar" value="0">
+						<input type="range" id="seek-bar" min="0">
 
 						<p id="time-display" ></p>
 					</div><!-- /#video-controls -->

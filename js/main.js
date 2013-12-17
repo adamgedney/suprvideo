@@ -2,6 +2,7 @@ $(function(){
 
 //NOTES:  
 //fix the seek bar. Makes it's max val = to the length of the video
+//set seek bar timedisplay to video duration on load
 
 
 //-----------templating---------------
@@ -58,14 +59,19 @@ $.ajax({
 
 	$('#desc-content').append(info_init);
 
-							
-							
+	
+											
 	//first BACKGROUND VIDEO being added to DOM
 	//**NOTE** MUSTTTT use the .scr function in JS to make caching work properly
 	var video = document.getElementById('video');
+
 	$('#video').attr("poster", vids[0].poster);
 	video.src = vids[0].video_path;
 	
+	//sets video seek-bar duration
+	// video.load();
+	// $('#time-display').html(video.duration);
+
 
 	//loads video control and functions once first video has been added to DOM
 	video_init();
@@ -74,9 +80,6 @@ $.ajax({
 	}//success
 });// ajax
 
-
-
-	
 
 
 
@@ -97,7 +100,6 @@ function video_init(){
 // Video
 var video = document.getElementById("video");
 var seekBar = document.getElementById("seek-bar");
-
 
 
 
@@ -186,10 +188,14 @@ function timeDisplay(){
 	var curTime = Math.floor(video.currentTime).toString();
 	var pos = "";
 
+	//sets seekbar length to video duration
+	$('#seek-bar').attr("max", video.duration);
+
+
 	if(curTime.length < 2){
 		pos = "00:0" + Math.floor(video.currentTime);
 	}else{
-		pos = "00:" + Math.floor(video.currentTime);
+		pos = "00:" + Math.floor(video.currentTime) ;
 	}
 
 	//upon video end, changes play button to a replay button
@@ -203,7 +209,7 @@ function timeDisplay(){
 	if(video.playbackRate > 0){
 
 		$('#time-display').html(pos);
-		seekBar.value = Math.floor(video.currentTime) * 3.25;
+		seekBar.value = Math.floor(video.currentTime);
 
 		setTimeout(timeDisplay, 100);
 	};
@@ -245,9 +251,65 @@ $(document).on('click', '.video-thumb', function(e){
 				info += '<p>' + vid.desc + '</p>';
 
 			$('#desc-content').append(info);
+
+
+
+				//ajax call to run through folder contents returning file list for DOWNLOADS
+				$.ajax({
+					url: '/controllers/get_files.php',
+					type: 'get',
+					dataType: 'json',
+					success: function(response){
+
+						fileList(response, vid.title);
+					}//success
+				});//ajax
 		}//success
 	});//ajax
 });//onClick .video-thumb
+
+
+
+
+//adds folder audio/video file list to download modal
+function fileList(response, title){
+	
+	var v = response.video;
+	var a = response.audio;
+
+	$('#file-list').empty();
+	$('#audio-dl').empty();
+// console.log(v.substring(0,v.length - 4) , title , "title");
+
+	
+	//loops through video results
+	for(var j=0;j<v.length;j++){
+		var name = v[j];
+		var t = name.substring(0,v[j].length - 4);
+
+		//only populates where file is the same as clicked video
+		if(t == title){
+			var html = '<li><a href="uploads/' + name + '"><img class="dl-list-reel" src="images/reel.png" alt="movie icon"/>' + name + '<img class="dl-list-icon" src="images/cloud.png" alt="download link"/></a><li>';
+
+			$('#file-list').append(html);
+		}//if
+	}//for
+
+
+	//loops through audio results
+	for(var k=0; k<a.length;k++){
+		var a_name = a[k];
+		var a_t = a_name.substring(0,a[k].length - 4);
+
+		//only populates where file is the same as clicked video
+		if(a_t == title){
+			
+			var a_html = '<a href="#"><img class="dl-list-reel" src="images/spkr.png" alt="audio icon"/>' + a_name + '<img  class="dl-list-icon"src="images/cloud.png" alt="download link"/></a>';
+
+			$('#audio-dl').append(a_html);
+		}//if
+	}//for
+};//fileList()
 
 
 
@@ -270,6 +332,9 @@ $(document).on('dblclick', '.video-thumb', function(e){
 			var vid = response.video[0];
 			
 			var current_video = document.getElementById("video");
+
+			// //sets video seek-bar duration
+			// $('#time-display').html(current_video.duration;
 
 			//loads BACKGROUND VIDEO to DOM
 			$('#video').attr("poster", vid.poster);
