@@ -72,6 +72,8 @@ $.ajax({
 	// video.load();
 	// $('#time-display').html(video.duration);
 
+	//runs the folder parser function that populates the dl file list
+	fileList(vids[0].title);
 
 	//loads video control and functions once first video has been added to DOM
 	video_init();
@@ -252,18 +254,9 @@ $(document).on('click', '.video-thumb', function(e){
 
 			$('#desc-content').append(info);
 
-
-
-				//ajax call to run through folder contents returning file list for DOWNLOADS
-				$.ajax({
-					url: '/controllers/get_files.php',
-					type: 'get',
-					dataType: 'json',
-					success: function(response){
-
-						fileList(response, vid.title);
-					}//success
-				});//ajax
+			//runs the folder parser function
+			fileList(vid.title);
+	
 		}//success
 	});//ajax
 });//onClick .video-thumb
@@ -272,43 +265,54 @@ $(document).on('click', '.video-thumb', function(e){
 
 
 //adds folder audio/video file list to download modal
-function fileList(response, title){
+function fileList(title){
 	
-	var v = response.video;
-	var a = response.audio;
 
-	$('#file-list').empty();
-	$('#audio-dl').empty();
-// console.log(v.substring(0,v.length - 4) , title , "title");
+	//ajax call to run through folder contents returning file list for DOWNLOADS
+	$.ajax({
+		url: '/controllers/get_files.php',
+		type: 'get',
+		dataType: 'json',
+		success: function(response){
 
-	
-	//loops through video results
-	for(var j=0;j<v.length;j++){
-		var name = v[j];
-		var t = name.substring(0,v[j].length - 4);
+		
+			var v = response.video;
+			var a = response.audio;
 
-		//only populates where file is the same as clicked video
-		if(t == title){
-			var html = '<li><a href="uploads/' + name + '"><img class="dl-list-reel" src="images/reel.png" alt="movie icon"/>' + name + '<img class="dl-list-icon" src="images/cloud.png" alt="download link"/></a><li>';
-
-			$('#file-list').append(html);
-		}//if
-	}//for
+			$('#file-list').empty();
+			$('#audio-dl').empty();
 
 
-	//loops through audio results
-	for(var k=0; k<a.length;k++){
-		var a_name = a[k];
-		var a_t = a_name.substring(0,a[k].length - 4);
-
-		//only populates where file is the same as clicked video
-		if(a_t == title){
 			
-			var a_html = '<a href="#"><img class="dl-list-reel" src="images/spkr.png" alt="audio icon"/>' + a_name + '<img  class="dl-list-icon"src="images/cloud.png" alt="download link"/></a>';
+			//loops through video results
+			for(var j=0;j<v.length;j++){
+				var name = v[j];
+				var t = name.substring(0,v[j].length - 4);
 
-			$('#audio-dl').append(a_html);
-		}//if
-	}//for
+				//only populates where file is the same as clicked video
+				if(t == title){
+					var html = '<li><a href="uploads/' + name + '"><img class="dl-list-reel" src="images/reel.png" alt="movie icon"/>' + name + '<img class="dl-list-icon" src="images/cloud.png" alt="download link"/></a><li>';
+
+					$('#file-list').append(html);
+				}//if
+			}//for
+
+
+			//loops through audio results
+			for(var k=0; k<a.length;k++){
+				var a_name = a[k];
+				var a_t = a_name.substring(0,a[k].length - 4);
+
+				//only populates where file is the same as clicked audio
+				if(a_t == title){
+					
+					var a_html = '<a href="#"><img class="dl-list-reel" src="images/spkr.png" alt="audio icon"/>' + a_name + '<img  class="dl-list-icon"src="images/cloud.png" alt="download link"/></a>';
+
+					$('#audio-dl').append(a_html);
+				}//if
+			}//for
+		}//success
+	});//ajax
 };//fileList()
 
 
