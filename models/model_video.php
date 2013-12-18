@@ -6,135 +6,61 @@ Class Model_Video{
 
 
 
-public function get_All_Videos(){
+	public function get_All_Videos(){
 
-	$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
+		$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
 
-	$st = $db->prepare("SELECT * FROM videos");
-	$st->execute();
+		$st = $db->prepare("SELECT * FROM videos");
+		$st->execute();
 
-	$obj = $st->fetchAll();
+		$obj = $st->fetchAll();
 
-	return $obj;
-}
-
-
-
-
-
-public function get_Video($vid_id){
-
-	$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
-
-	$st = $db->prepare("SELECT * FROM videos WHERE id = :vid_id");
-	$st->execute(array(":vid_id"=>$vid_id));
-
-	$obj = $st->fetchAll();
-
-	return $obj;
-}
+		return $obj;
+	}
 
 
 
 
 
 
-	// public $sql;
-	// public $db;
-
-	// public function __construct(){
-	// 	// mongo as a class level variable is now
-	// 	//actually a property, therefore no $
-	// 	$this->sql = new Mongo();
-
-	// 	// //database connection to mongo
-	// 	$this->db = $this->mongo->selectDb('blog')->selectCollection('posts');
-	// }
-
-	
 
 
-	// public function newPost($id,$author,$title,$text,$category){
+	public function get_Video($vid_id){
 
+		$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
 
-	// 	$datetime = new DateTime('NOW');
-	// 	// $datetime = new DateTimeZone('Eastern');
-	// 	$datetime = date("m/d/y g:i a"); 
-				
-	// 	$obj = array(
-	// 		'_id'=>$id, 
-	// 		'author'=>$author, 
-	// 		'title'=>$title, 
-	// 		'text'=>$text, 
-	// 		'category'=>$category, 
-	// 		'created'=>$datetime,
-	// 		'comments'=>array()
-	// 	);
+		$st = $db->prepare("SELECT * FROM videos WHERE id = :vid_id");
+		$st->execute(array(":vid_id"=>$vid_id));
 
-	// 	$this->blog->save($obj);
-	// }
+		$obj = $st->fetchAll();
+
+		return $obj;
+	}
 
 
 
 
-	// public function updatePost($id,$author,$title,$text,$category){
-
-	// 	ini_set('mongo.cmd', ':');
-
-	// 	$updated = new DateTime('NOW');
-	// 	// $updated = new DateTimeZone('Eastern');
-	// 	$updated = date("m/d/y g:i a");
-
-	// 	$obj = array( 
-	// 		'author'=>$author, 
-	// 		'title'=>$title, 
-	// 		'text'=>$text, 
-	// 		'category'=>$category, 
-	// 		'updated'=>$updated
-	// 	);
-
-	// 	$this->blog->update(array('_id'=>$id), array(':set'=>$obj));
-
-	// }
 
 
 
 
-	// public function getPost($id){
-	// 	$result = $this->blog->findOne(array('_id' => $id));
-	// 	return $result;
-	// }
+	function add_Video($name, $title){
+
+		$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
+
+		$st = $db->prepare("INSERT INTO videos(video_path, title) VALUES('uploads/$name', '$title')");
+		$st->execute(array(':name'=>$name, ':title'=>$title));
+
+		$obj = $st->fetchAll();
+
+		return $st;
+	}
 
 
 
 
-	// public function getPosts(){
-	// 	$result = $this->blog->find()->sort(array('created' => -1));
-	// 	return $result;
-	// 	// return iterator_to_array($result);
-	// }
 
 
 
 
-	// public function newComment($id,$author,$text){
-
-	// 	ini_set('mongo.cmd', ':');
-
-	// 	$createddate = new DateTime('NOW');
-	// 	// $datetime = new DateTimeZone('Eastern');
-	// 	$createddate = date("m/d/y g:i a"); 
-				
-	// 	$obj = array(
-	// 			'author'=>$author,
-	// 			'created'=>$createddate,
-	// 			'text'=>$text
-	// 	);
-
-	// 	$this->blog->update(array('_id'=>$id), array(':push'=>array('comments'=>$obj)));
-
-	// }
-
-
-}// /class	
-			
+}		

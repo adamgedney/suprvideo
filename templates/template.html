@@ -16,8 +16,10 @@
 
 				<h2>Add a Video File</h2>
 
-				<input type="text" name="upload-field" placeholder="/Users/adamgedney/Movies/myVideo.mp4"/>
-				<button type="button" id="form-submit">Add Video File</button>
+				<form action="?action=upload" id="file-upload-form" method="post" enctype="multipart/form-data">
+					<input type="file" name="file" placeholder="myVideo.mp4" accept="video/mp4, video/mov, video/ogg"/>
+					<input type="submit" id="form-submit" value="Add Video File"/>
+				</form>
 
 				<img id="upload-success" src="images/check.png" alt="successful upload icon" />
 			</div><!-- /.form-wrapper-->

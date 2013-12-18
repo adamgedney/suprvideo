@@ -1,17 +1,6 @@
 <?php
 
 
-	// //uploads image to images/library directory
-	// public function fileUpload($file){
-
-	// 	$tempfile = $file["tmp_name"];
-
-	// 	$dir = "uploads/".$file['name'];
-	// 	move_uploaded_file($tempfile,$dir);
-	
-	//  }// /fileUpload
-
-
 $path = "../uploads";
 $dir = scandir($path);
 

@@ -22,6 +22,7 @@ $.get('/templates/template.html', function(htmlArg){
 	$('.dl-list').hide();
 	$('.desc').hide();
 	$('.form-wrapper').hide();
+	$('#upload-success').hide();
 
 
 
@@ -254,7 +255,7 @@ $(document).on('click', '.video-thumb', function(e){
 
 			$('#desc-content').append(info);
 
-			//runs the folder parser function
+			//runs the folder parser function and populates dl list modal
 			fileList(vid.title);
 	
 		}//success
@@ -267,7 +268,6 @@ $(document).on('click', '.video-thumb', function(e){
 //adds folder audio/video file list to download modal
 function fileList(title){
 	
-
 	//ajax call to run through folder contents returning file list for DOWNLOADS
 	$.ajax({
 		url: '/controllers/get_files.php',
@@ -306,7 +306,7 @@ function fileList(title){
 				//only populates where file is the same as clicked audio
 				if(a_t == title){
 					
-					var a_html = '<a href="#"><img class="dl-list-reel" src="images/spkr.png" alt="audio icon"/>' + a_name + '<img  class="dl-list-icon"src="images/cloud.png" alt="download link"/></a>';
+					var a_html = '<a href="uploads/' + a_name + '"><img class="dl-list-reel" src="images/spkr.png" alt="audio icon"/>' + a_name + '<img  class="dl-list-icon"src="images/cloud.png" alt="download link"/></a>';
 
 					$('#audio-dl').append(a_html);
 				}//if
