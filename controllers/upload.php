@@ -1,6 +1,6 @@
 <?php
 require 'models/model_video.php';
-require 'vendor/autoload.php';
+
 
 $model = new Model_Video();
 
@@ -37,10 +37,12 @@ $file = $_FILES['file'];
 
 $filename = substr($file['name'], 0, -4);
 $mp4_jpgPoster = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -ss 00:00:02 -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/test.mp4 -frames:v 1 /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/uploads/poster/' . $filename . '%1d.jpg 2>&1';
-$mp4_jpgShots = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -ss 00:00:08 -t 00:00:22 -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/test.mp4 -r 3.0 /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/uploads/shots/' . $filename . '%1d.jpg 2>&1';
+$mp4_jpgShot1 = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -ss 00:00:02 -t 00:00:10 -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/test.mp4 -r 0.3 /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/uploads/shots/' . $filename . '1.jpg 2>&1';
+$mp4_jpgShot2 = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -ss 00:00:13 -t 00:00:19 -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/test.mp4 -r 0.3 /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/uploads/shots/' . $filename . '2.jpg 2>&1';
+$mp4_jpgShot3 = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -ss 00:00:21 -t 00:00:28 -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/test.mp4 -r 0.3 /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/uploads/shots/' . $filename . '3.jpg 2>&1';
 
 
-$out = shell_exec($mp4_jpgShots);
+$out = shell_exec($mp4_jpgShot3);
 var_dump($out);
 
 
