@@ -39,6 +39,19 @@ $mp4_jpgShot2 = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -ss 00:00:13 -t 00:00:19
 $mp4_jpgShot3 = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -ss 00:00:21 -t 00:00:28 -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/uploads/' . $filename . '.mp4 -r 0.3 /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/uploads/shots/' . $filename . '3.jpg 2>&1';
 
 
+//file paths
+$mp4 = "uploads/". $filename . ".mp4";
+$mov = "uploads/". $filename . ".mov";
+$ogv = "uploads/". $filename . ".ogv";
+$mp3 = "uploads/". $filename . ".mp3";
+$shot1 = "uploads/shots/". $filename . "1.jpg";
+$shot2 = "uploads/shots/". $filename . "2.jpg";
+$shot3 = "uploads/shots/". $filename . "3.jpg";
+$poster = "uploads/poster/". $filename . ".jpg";
+$title = $filename;
+
+	
+
 if($move){
 	//converts input mp4 to .mov and .ogv
 	shell_exec($mp4_mov);
@@ -56,12 +69,9 @@ if($move){
 	shell_exec($mp4_jpgShot3);
 
 
-
-	// //add references to database
-	// $title = $filename;
-
-	// //adds video entry to database
-	// $model->add_Video($file['name'], $title);
+	//adds video & still paths to database
+	$model->add_Video($mp4, $mov, $ogv, $mp3, $shot1, $shot2, $shot3, $poster, $title);
+	
 
 }// if $move
 
