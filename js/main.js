@@ -25,7 +25,7 @@ $.get('/templates/template.html', function(htmlArg){
 	$('#upload-success').hide();
 
 
-
+ 
 
 //********get and load all videos upon program init********
 $.ajax({
@@ -45,7 +45,7 @@ $.ajax({
 	};
 
 
-
+console.log(response , "this is the db call repsonse");
 	//loads default video SHOTS to DOM
 	var shots_init = '<a href="' + vids[0].shot_1 + '" data-lightbox="1"><img src="' + vids[0].shot_1 + '" alt="screenshot"/></a>';
 		shots_init += '<a href="' + vids[0].shot_2 + '" data-lightbox="1"><img src="' + vids[0].shot_2 + '" alt="screenshot"/></a>';
@@ -67,8 +67,8 @@ $.ajax({
 	var video = document.getElementById('video');
 
 	$('#video').attr("poster", vids[0].poster);
-	video.src = vids[0].video_path;
-	
+	video.src = vids[0].mp4;
+//*****************************************HERE IS WHERE I NEED TO ADD MULITPLE VIDEO SRC	
 	//sets video seek-bar duration
 	// video.load();
 	// $('#time-display').html(video.duration);
@@ -342,7 +342,7 @@ $(document).on('dblclick', '.video-thumb', function(e){
 
 			//loads BACKGROUND VIDEO to DOM
 			$('#video').attr("poster", vid.poster);
-			current_video.src = vid.video_path;
+			current_video.src = vid.mp4;
 
 
 		}//success
