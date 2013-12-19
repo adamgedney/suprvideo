@@ -14,10 +14,13 @@
 			<div class="form-wrapper">
 				<img class="close-modal-x" src="images/x.png" alt="close modal icon" />
 
-				<h2>Add An .mp4 Video File</h2>
+				<h2>Drop .mp4 Video File</h2>
+				<p class="drop-inst">Click box if your browser doesn't support dropping</p>
 
+				<div class="drop-area">
+				</div><!-- /.drop-area-->
 				<form action="?action=upload" id="file-upload-form" method="post" enctype="multipart/form-data">
-					<input type="file" name="file" placeholder="myVideo.mp4" accept="video/mp4"/>
+					<input type="file" id="upload-drop" name="file" accept="video/mp4"/>
 					<input type="submit" id="form-submit" value="Add Video File"/>
 				</form>
 

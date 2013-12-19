@@ -68,7 +68,22 @@ console.log(response , "this is the db call repsonse");
 
 	$('#video').attr("poster", vids[0].poster);
 	video.src = vids[0].mp4;
-//*****************************************HERE IS WHERE I NEED TO ADD MULITPLE VIDEO SRC	
+
+	//build fallbacks
+	var fallback = '<source src="' + vids[0].mov + '" type="video/mov/>';
+		fallback += '<source src="' + vids[0].ogv + '" type="video/ogv/>';
+
+		fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">';
+		fallback += '<param name="movie" value="' + vids[0].flv + '" />';
+		fallback += '<param name="allowFullScreen" value="true" />';
+		fallback += '<param name="wmode" value="transparent" />';
+		fallback += '<param name="flashVars" value="config={playlist:[' + vids[0].poster + ',{url:' + vids[0].mp4 + ', autoPlay:false}]}" />';
+		fallback += '<img alt="' + vids[0].title + '" src="' + vids[0].poster + '" title="No video playback capabilities, please download the video instead." />';
+		fallback += '</object>';
+		fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
+
+	$('#video').append(fallback);
+	
 	//sets video seek-bar duration
 	// video.load();
 	// $('#time-display').html(video.duration);
@@ -79,6 +94,7 @@ console.log(response , "this is the db call repsonse");
 	//loads video control and functions once first video has been added to DOM
 	video_init();
 
+	
 
 	}//success
 });// ajax
@@ -86,7 +102,10 @@ console.log(response , "this is the db call repsonse");
 
 
 
-
+$(document).on('click', '.upload-drop', function(e){
+		// $('#drop-value').html($('#upload-drop').val());
+		console.log("drop val");
+	});
 
 
 
