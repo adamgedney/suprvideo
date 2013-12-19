@@ -13,7 +13,7 @@ foreach($dir as $file){
 	//filters directory of non image files
 	if(($file!='..') && ($file!='.') && ($file!='.DS_Store')){
 		
-		if((strpos($file,'.mp4') !== false) || (strpos($file,'.mov') !== false) || (strpos($file,'.ogv') !== false)){
+		if((strpos($file,'.mp4') !== false) || (strpos($file,'.mov') !== false) || (strpos($file,'.ogv') !== false) || (strpos($file,'.flv') !== false) || (strpos($file,'.WebM') !== false)){
 			array_push($video, $file);
 
 		}else if(strpos($file,'.mp3') !== false){

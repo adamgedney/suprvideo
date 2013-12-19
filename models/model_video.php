@@ -44,11 +44,11 @@ Class Model_Video{
 
 
 
-	function add_Video($mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title){
+	function add_Video($webm, $mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title){
 
 		$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
 
-		$st = $db->prepare("INSERT INTO videos(mp4, mov, ogv, flv, mp3, shot_1, shot_2, shot_3, poster, title) VALUES('$mp4', '$mov', '$ogv', '$flv', '$mp3', '$shot1', '$shot2', '$shot3', '$poster', '$title')");
+		$st = $db->prepare("INSERT INTO videos(webm, mp4, mov, ogv, flv, mp3, shot_1, shot_2, shot_3, poster, title) VALUES('$webm', '$mp4', '$mov', '$ogv', '$flv', '$mp3', '$shot1', '$shot2', '$shot3', '$poster', '$title')");
 		$st->execute();
 
 		$obj = $st->fetchAll();

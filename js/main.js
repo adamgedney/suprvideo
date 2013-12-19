@@ -1,10 +1,5 @@
 $(function(){
 
-//NOTES:  
-//fix the seek bar. Makes it's max val = to the length of the video
-//set seek bar timedisplay to video duration on load
-//
-//add titles to front end above clips and shots "Your Videos" & "Chanel"<--title of movie
 
 
 //-----------templating---------------
@@ -26,6 +21,7 @@ $.get('/templates/template.html', function(htmlArg){
 	$('.form-wrapper').hide();
 	$('#upload-success').hide();
 	$('#loading').hide();
+	$('#seek-bar').val(0);
 
 
  
@@ -86,33 +82,25 @@ $.ajax({
 	//**NOTE** MUSTTTT use the .scr function in JS to make caching work properly
 	var video = document.getElementById('video');
 
-	$('#video').attr("poster", vids[0].poster);
 	video.src = vids[0].mp4;
+	$('#video').attr("poster", vids[0].poster);
 
 	//build fallbacks
-	var fallback = '<source src="' + vids[0].mov + '" type="video/mov/>\r\n';
-		fallback += '<source src="' + vids[0].ogv + '" type="video/ogv/>\r\n';
+	var fallback = '<source src="' + vids[0].webm + '" type="video/webm" />' + '\n';
+		fallback += '<source src="' + vids[0].ogv + '" type="video/ogv" />' + '\n';
 
-		fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">';
-		fallback += '<param name="movie" value="' + vids[0].flv + '" />';
-		fallback += '<param name="allowFullScreen" value="true" />';
-		fallback += '<param name="wmode" value="transparent" />';
-		fallback += '<param name="flashVars" value="config={playlist:[' + vids[0].poster + ',{url:' + vids[0].mp4 + ', autoPlay:false}]}" />';
-		fallback += '<img alt="' + vids[0].title + '" src="' + vids[0].poster + '" title="No video playback capabilities, please download the video instead." />';
-		fallback += '</object>';
+		fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">' + '\n';
+		fallback += '<param name="movie" value="' + vids[0].flv + '" />' + '\n';
+		fallback += '<param name="allowFullScreen" value="true" />' + '\n';
+		fallback += '<param name="wmode" value="transparent" />' + '\n';
+		fallback += '<param name="flashVars" value="config={playlist:[' + vids[0].poster + ',{url:' + vids[0].mp4 + ', autoPlay:false}]}" />' + '\n';
+		fallback += '<img alt="' + vids[0].title + '" src="' + vids[0].poster + '" title="No video playback capabilities, please download the video instead." />' + '\n';
+		fallback += '</object>' + '\n';
 		fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
 
 	$('#video').empty();
 	$('#video').append(fallback);
 	
-
-
-
-	//sets video seek-bar duration
-	// video.load();
-	// $('#time-display').html(video.duration);
-
-
 
 
 	//runs the folder parser function that populates the dl file list
@@ -188,13 +176,18 @@ $(window).on('keypress', function(e){
 
 
 
-function playPause(video){
+function playPause(video, seekBar){
 	 if (video.paused == true) {
     // Play the video
     video.play();
 
     //starts time display
     timeDisplay()
+
+    //sets video seek-bar duration
+	$('#seek-bar').attr('max', video.duration);
+
+
 
     // Update the button text to 'Pause'
      $('#play-pause').css('background', 'url(images/pause.png) no-repeat');
@@ -228,12 +221,11 @@ function playPause(video){
 // Event listener for the seek bar
 seekBar.addEventListener("change", function() {
 
-  
-  // Calculate the new time
-  var time = video.duration * (seekBar.value / 100);
-
   // Update the video time
-  video.currentTime = time;
+  //because seek bar max is video.duration, 
+  //current time is same as seekbar value.
+  video.currentTime = seekBar.value;
+
 });// seek listener
 
 
@@ -459,16 +451,15 @@ $(document).on('dblclick', '.video-thumb', function(e){
 			current_video.src = vid.mp4;
 
 			//build fallbacks
-			var fallback = '<source src="' + vid.mov + '" type="video/mov></source>\r\n';
-				fallback += '<source src="' + vid.ogv + '" type="video/ogv></source>\r\n';
-
-				fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">';
-				fallback += '<param name="movie" value="' + vid.flv + '" />';
-				fallback += '<param name="allowFullScreen" value="true" />';
-				fallback += '<param name="wmode" value="transparent" />';
-				fallback += '<param name="flashVars" value="config={playlist:[' + vid.poster + ',{url:' + vid.mp4 + ', autoPlay:false}]}" />';
-				fallback += '<img alt="' + vid.title + '" src="' + vid.poster + '" title="No video playback capabilities, please download the video instead." />';
-				fallback += '</object>';
+			var fallback = '<source src="' + vid.webm + '" type="video/webm" />' + '\n';
+				fallback += '<source src="' + vid.ogv + '" type="video/ogv" />' + '\n';
+				fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">' + '\n';
+				fallback += '<param name="movie" value="' + vid.flv + '" />' + '\n';
+				fallback += '<param name="allowFullScreen" value="true" />' + '\n';
+				fallback += '<param name="wmode" value="transparent" />' + '\n';
+				fallback += '<param name="flashVars" value="config={playlist:[' + vid.poster + ',{url:' + vid.mp4 + ', autoPlay:false}]}" />' + '\n';
+				fallback += '<img alt="' + vid.title + '" src="' + vid.poster + '" title="No video playback capabilities, please download the video instead." />' + '\n';
+				fallback += '</object>' + '\n';
 				fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
 
 			$('#video').empty();
@@ -608,9 +599,10 @@ $(document).on('click', '#form-submit', function(e){
 
 
 
-
-
-
+//shows upload checkmark when file enters input-file field
+$(document).on('change', '#upload-drop', function(){
+	$('#upload-success').show();
+});
 
 
 

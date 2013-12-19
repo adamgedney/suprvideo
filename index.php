@@ -1,3 +1,9 @@
+<?php 
+	if(isset($_GET['action'])){
+		if(file_exists('controllers/' . $_GET['action'] . '.php')){
+			require 'controllers/' . $_GET['action'] . '.php';
+		}
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,28 +18,22 @@
 
 
 </head>
-	<body>
-
-	<?php //routing
-	if(isset($_GET['action'])){
-		if(file_exists('controllers/' . $_GET['action'] . '.php')){
-			require 'controllers/' . $_GET['action'] . '.php';
-		}
-	}?>	
+	<body>	
 
 		<div id="bg-container">
 			<video id="video" poster="">
+				
 			</video>
 		</div><!-- /#bg-container-->
 		
 		<!-- loading gif-->
 		<div id="loading">
 			<img src="images/loading.gif" alt="loading gif">
-			<p>Your file is being converted. Please be patient. Or not... ;)</p>
+			<p>Your file is being converted. Please be patient. Do not hit the back button, or refresh this page. The world will explode!</p>
 		</div><!-- /#loading-->
 
 		<!-- upload modal button-->	
-		<a href="#" id="vid-button" />+ Add Video</a>
+		<a href="#" id="vid-button" title="Convert your .mp4 to .webm, .mov, .flv, .ogv, .mp3"/>+ Add Video</a>
 		
 		<div id="site-container">
 		</div><!-- /#site-container-->

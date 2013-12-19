@@ -56,7 +56,7 @@ video{
 	text-align: center;
 	margin: 8% auto;
 	font-weight: 700;
-	font-size: 1.5em;
+	font-size: 1.2em;
 	background: rgba(19,19,19, 0.8);
 	border-radius: 2px; 
 }
@@ -99,8 +99,9 @@ video{
 	}
 
 	button, #form-submit{
-		appearance: none;
 		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
 		background: $blue;
 		color: $white;
 		border: none;
@@ -115,18 +116,30 @@ video{
 }
 
 #upload-drop{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 	outline: none;
+	border: none;
+	background: none;
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 300px;
+	width: 390px;
 	margin-top: 82px;
+	margin-left: -150px;
 	height: 108px;
 	line-height: 126px;
-	text-align: center;
-	padding-top: 60px;
-	padding-left: 9px;
+	text-align: right;
+	padding-top: 65px;
+	padding-left: 109px;
 	vertical-align: bottom;
+	-moz-vertical-align: baseline;
+	clip:rect(0px,700px, 400px,202px);//removes button from view in firefox
+
+	// label{
+	// 	padding-left: 300px;
+	// }
 }
 
 .drop-area{
@@ -144,7 +157,8 @@ video{
 
 #upload-success{
 	float: right;
-	margin-top: -32px;
+	margin-top: -132px;
+	margin-right: 9px;
 	opacity: .9;
 }
 
@@ -173,6 +187,8 @@ video{
 .dl-list{
 	ul{
 		position: relative;
+		height: 125px;
+		overflow: scroll;
 
 		li{
 			// border-bottom: 1px solid $white;
@@ -186,6 +202,8 @@ video{
 		margin-bottom: 6px;
 	}
 }
+
+
 
 .dl-list-reel{
 	margin-right: 9px;
@@ -291,14 +309,16 @@ footer{
 /*style the range sliders*/
 input[type=range]{
 	-webkit-appearance: none;
+	-moz-appearance: none;
 	appearance: none;
 	height: 1px;
 	width: 250px;
-	margin-bottom: 40px;
+	// margin-bottom: 40px;
+	line-height: 100px;
 	vertical-align: middle;
 	background: $black;
 	// border-top: 1px solid $white;
-	opacity: .5;
+	opacity: .3;
 	outline: none;
 }
 
@@ -350,7 +370,6 @@ p.title-display, .display{
 	img{
 		display: inline;
 		max-height: 50px;
-		background: red;
 		margin-right: 6px;
         vertical-align: middle;
         

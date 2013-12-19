@@ -9,8 +9,11 @@ $model = new Model_Video();
 
 if(isset($_FILES['file'])){
 
+	//strip spaces and & from string
+	$string = str_replace(' ', '', $_FILES['file']);
+	$string = str_replace('&', '', $string);
 
-	$file = $_FILES['file'];
+	$file = $string;
 	$tempfile = $file["tmp_name"];
 	$dir = "uploads/".$file['name'];
 
@@ -31,6 +34,7 @@ if(isset($_FILES['file'])){
 
 	//ffmpeg shell scripts
 	// $mp4_water = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/' . $filename . '.mp4 -y /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/images/logo.png -filter_complex overlay /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/' . $filename . '.mp4 2>&1';
+	$mp4_webm = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4  -vcodec libvpx -acodec libvorbis  ' . $sitePath . 'uploads/' . $filename . '.WebM 2>&1';
 	$mp4_mov = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -acodec copy -vcodec copy -f mov ' . $sitePath . 'uploads/' . $filename . '.mov 2>&1';
 	$mp4_ogv = $ffmpeg2theoraPath . ' ' . $sitePath . 'uploads/' . $filename . '.mp4';
 	$mp4_flv = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -ar 44100 -ab 96 -f flv ' . $sitePath . 'uploads/' . $filename . '.flv 2>&1';
@@ -40,8 +44,9 @@ if(isset($_FILES['file'])){
 	$mp4_jpgShot2 = $ffmpegPath . ' -ss 00:00:13 -t 00:00:19 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '2.jpg 2>&1';
 	$mp4_jpgShot3 = $ffmpegPath . ' -ss 00:00:21 -t 00:00:28 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '3.jpg 2>&1';
 
-
+//ffmpeg -i input.flv -vcodec libvpx -acodec libvorbis output.webm
 	//file paths
+	$webm = "uploads/". $filename . ".WebM";
 	$mp4 = "uploads/". $filename . ".mp4";
 	$mov = "uploads/". $filename . ".mov";
 	$ogv = "uploads/". $filename . ".ogv";
@@ -57,6 +62,7 @@ if(isset($_FILES['file'])){
 
 	if($move){
 		//converts input mp4 to .mov and .ogv
+		shell_exec($mp4_webm);
 		shell_exec($mp4_mov);
 		shell_exec($mp4_ogv);
 		shell_exec($mp4_flv);
@@ -70,12 +76,17 @@ if(isset($_FILES['file'])){
 		//creates screenshots from mp4 frames
 		shell_exec($mp4_jpgShot1);
 		shell_exec($mp4_jpgShot2);
-		shell_exec($mp4_jpgShot3);
+		$last_process = shell_exec($mp4_jpgShot3);
 
 
 		//adds video & still paths to database
-		$model->add_Video($mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title);
+		$model->add_Video($webm, $mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title);
 		
+		//strips actions from URL by reloading site after complete conversions
+		if($last_process){
+			header('Location: /');
+		}
+
 	}// if $move
 
 
