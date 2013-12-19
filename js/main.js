@@ -65,7 +65,7 @@ $.ajax({
 		shots_init += '<a href="' + vids[0].shot_3 + '" data-lightbox="1"><img src="' + vids[0].shot_3 + '" alt="screenshot"/></a>';
 	
 	$('.shots').append(shots_init);
-
+	$('.title-display').html(vids[0].title);
 
 
 
@@ -205,6 +205,10 @@ function playPause(video){
 
     // Update the button text to 'Play'
     $('#play-pause').css('background', 'url(images/play.png) no-repeat');
+
+    //show footer controls
+    $('footer').show();
+	$('#vid-button').show();
   }
 };
 
@@ -343,6 +347,7 @@ $(document).on('click', '.video-thumb', function(e){
 				info += '<p>' + vid.desc + '</p>';
 
 			$('#desc-content').append(info);
+			$('.title-display').html(vid.title);
 
 			//runs the folder parser function and populates dl list modal
 			fileList(vid.title);
@@ -468,6 +473,8 @@ $(document).on('dblclick', '.video-thumb', function(e){
 
 			$('#video').empty();
 			$('#video').append(fallback);
+
+			$('.title-display').html(vid.title);
 
 		}//success
 	});//ajax
@@ -615,39 +622,25 @@ $(document).on('click', '#form-submit', function(e){
 
 
 //-----------------Mousemove fadein/fadeout footer handler-------------------------
+// $(document).on('mouseover', '.pseudo-footer', function(){
+// 	// console.log('mouseover running');
 
-// $(document).on('mousemove', function(){
-
-// 	$('footer').stop().animate({opacity:0});
-// 	$('#vid-button').stop().animate({opacity:0});
-
-// 	$('footer').animate({opacity:1});
-// 	$('#vid-button').animate({opacity:1});
-
-// 	//runs fade out function
-// 	// setTimeout(fadeOutFooter, 2000);
-// });
-
-// function fadeOutFooter(){
-
-// 	$('footer').animate({opacity:0});
-// 	$('#vid-button').animate({opacity:0});
-	
-// };
-
-
-// $(window).mouseover('footer', function(){
 // 	$('footer').show();
 // 	$('#vid-button').show();
 // });
 
+// $(document).on('mouseover', 'footer', function(){
+// 	// console.log('mouseover running');
 
+// 	$('footer').show();
+// 	$('#vid-button').show();
+// });
 
-
-
-
-
-
+// $(document).on('mouseout', 'footer', function(){
+// 	// console.log('mouseover running');
+// 	$('footer').fadeOut(100);
+// 	$('#vid-button').fadeOut(100);
+// });
 
 
 

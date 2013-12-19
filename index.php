@@ -41,7 +41,6 @@
 
 		<!-- Scripts -->
 		<script src="js/jquery-1.10.2.min.js"></script>
-		<!-- // <script src="js/jquery-1.8.3.js"></script> -->
 		<script src="js/handlebars-v1.1.2.js"></script>
 		<script src="js/lightbox-2.6.min.js"></script>
 		<script src="js/main.js"></script>
