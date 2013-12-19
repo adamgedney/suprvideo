@@ -33,6 +33,10 @@ AddOutputFilterByType DEFLATE application/x-javascript
 SetOutputFilter DEFLATE
 </files>
 
+AddType video/webm .webm
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+
 
 #RewriteEngine On
 #RewriteCond %{HTTP_HOST} !^www\.

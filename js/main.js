@@ -14,6 +14,7 @@ $.get('/templates/template.html', function(htmlArg){
 	$('#site-container').append(siteTemplate);
 
 
+
 	//initializes hide on all show/hide behaviors
 	//once added to DOM
 	$('.dl-list').hide();
@@ -41,6 +42,16 @@ $.ajax({
 	dataType: 'json',
 	success: function(response){
 
+	//----loads bg-vid ----
+	var bgSource = $(htmlArg).find('#bg-vid').html();
+	var bgTemplate = Handlebars.compile(bgSource);
+	$('#bg-container').append(bgTemplate);
+
+
+
+
+
+	
 	var vids = response.videos
 
 	//loops through screenshots to grab the first shot from each DB video
@@ -82,24 +93,36 @@ $.ajax({
 	//**NOTE** MUSTTTT use the .scr function in JS to make caching work properly
 	var video = document.getElementById('video');
 
-	video.src = vids[0].mp4;
+	//video.src = vids[0].webm;
 	$('#video').attr("poster", vids[0].poster);
 
+	$('#fb-mp4').attr('src', vids[0].mp4);
+	$('#fb-webm').attr('src', vids[0].webm);
+	$('#fb-ogv').attr('src', vids[0].ogv);
+	$('#fb-flv').attr('value', vids[0].flv);
+	$('#fb-flv_img').attr({
+		alt: vids[0].title,
+		src: vids[0].poster
+		});
+
+	video.load();
+
 	//build fallbacks
-	var fallback = '<source src="' + vids[0].webm + '" type="video/webm" />' + '\n';
-		fallback += '<source src="' + vids[0].ogv + '" type="video/ogv" />' + '\n';
+	// var fallback = '<source src="' + vids[0].webm + '" type="video/webm" />' + '\n';
+	// 	fallback += '<source src="' + vids[0].mp4 + '" type="video/mp4" />' + '\n';
+	// 	fallback += '<source src="' + vids[0].ogv + '" type="video/ogv" />' + '\n';
 
-		fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">' + '\n';
-		fallback += '<param name="movie" value="' + vids[0].flv + '" />' + '\n';
-		fallback += '<param name="allowFullScreen" value="true" />' + '\n';
-		fallback += '<param name="wmode" value="transparent" />' + '\n';
-		fallback += '<param name="flashVars" value="config={playlist:[' + vids[0].poster + ',{url:' + vids[0].mp4 + ', autoPlay:false}]}" />' + '\n';
-		fallback += '<img alt="' + vids[0].title + '" src="' + vids[0].poster + '" title="No video playback capabilities, please download the video instead." />' + '\n';
-		fallback += '</object>' + '\n';
-		fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
+	// 	fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">' + '\n';
+	// 	fallback += '<param name="movie" value="' + vids[0].flv + '" />' + '\n';
+	// 	fallback += '<param name="allowFullScreen" value="true" />' + '\n';
+	// 	fallback += '<param name="wmode" value="transparent" />' + '\n';
+	// 	fallback += '<param name="flashVars" value="config={playlist:[' + vids[0].poster + ',{url:' + vids[0].mp4 + ', autoPlay:false}]}" />' + '\n';
+	// 	fallback += '<img alt="' + vids[0].title + '" src="' + vids[0].poster + '" title="No video playback capabilities, please download the video instead." />' + '\n';
+	// 	fallback += '</object>' + '\n';
+	// 	fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
 
-	$('#video').empty();
-	$('#video').append(fallback);
+	// $('#video').empty();
+	// $('#video').append(fallback);
 	
 
 
@@ -441,29 +464,42 @@ $(document).on('dblclick', '.video-thumb', function(e){
 
 			var vid = response.video[0];
 			
-			var current_video = document.getElementById("video");
+			// var current_video = document.getElementById("video");
 
 			// //sets video seek-bar duration
 			// $('#time-display').html(current_video.duration;
 
 			//loads BACKGROUND VIDEO to DOM
 			$('#video').attr("poster", vid.poster);
-			current_video.src = vid.mp4;
+			// current_video.src = vid.mp4;
 
-			//build fallbacks
-			var fallback = '<source src="' + vid.webm + '" type="video/webm" />' + '\n';
-				fallback += '<source src="' + vid.ogv + '" type="video/ogv" />' + '\n';
-				fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">' + '\n';
-				fallback += '<param name="movie" value="' + vid.flv + '" />' + '\n';
-				fallback += '<param name="allowFullScreen" value="true" />' + '\n';
-				fallback += '<param name="wmode" value="transparent" />' + '\n';
-				fallback += '<param name="flashVars" value="config={playlist:[' + vid.poster + ',{url:' + vid.mp4 + ', autoPlay:false}]}" />' + '\n';
-				fallback += '<img alt="' + vid.title + '" src="' + vid.poster + '" title="No video playback capabilities, please download the video instead." />' + '\n';
-				fallback += '</object>' + '\n';
-				fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
+			$('#fb-mp4').attr('src', vid.mp4);
+			$('#fb-webm').attr('src', vid.webm);
+			$('#fb-ogv').attr('src', vid.ogv);
+			$('#fb-flv').attr('value', vid.flv);
+			$('#fb-flv_img').attr({
+				alt: vid.title,
+				src: vid.poster
+				});
 
-			$('#video').empty();
-			$('#video').append(fallback);
+			video.load();
+
+
+			// //build fallbacks
+			// var fallback = '<source src="' + vid.webm + '" type="video/webm" />' + '\n';
+			// 	fallback += '<source src="' + vid.mp4 + '" type="video/mp4" />' + '\n';
+			// 	fallback += '<source src="' + vid.ogv + '" type="video/ogv" />' + '\n';
+			// 	fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">' + '\n';
+			// 	fallback += '<param name="movie" value="' + vid.flv + '" />' + '\n';
+			// 	fallback += '<param name="allowFullScreen" value="true" />' + '\n';
+			// 	fallback += '<param name="wmode" value="transparent" />' + '\n';
+			// 	fallback += '<param name="flashVars" value="config={playlist:[' + vid.poster + ',{url:' + vid.mp4 + ', autoPlay:false}]}" />' + '\n';
+			// 	fallback += '<img alt="' + vid.title + '" src="' + vid.poster + '" title="No video playback capabilities, please download the video instead." />' + '\n';
+			// 	fallback += '</object>' + '\n';
+			// 	fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
+
+			// $('#video').empty();
+			// $('#video').append(fallback);
 
 			$('.title-display').html(vid.title);
 

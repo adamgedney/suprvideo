@@ -67,7 +67,7 @@ video{
 	font-weight: 100;
 	display: inline-block;
 	position: absolute;
-	bottom: 105px;
+	bottom: 117px;
 	left: 44%;
 	right: 44%;
 	width: 150px;
@@ -85,7 +85,7 @@ video{
 	left: 39%;
 	right: 39%;
 	background: rgba(19,19,19, 0.8);
-	z-index: -1;
+	z-index: 0;
 	padding: 18px;
 	overflow: hidden;
 	border-radius: 2px;
@@ -249,7 +249,7 @@ p img.dl-list-icon{
 
 footer{
 	opacity: .9;
-	height: 100px;
+	height: 112px;
 	width: 100%;
 	position: absolute;
 	bottom: 0;
@@ -262,13 +262,13 @@ footer{
 
 }
 
-.pseudo-footer{
-	height: 100px;
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	z-index: -100;
-}
+// .pseudo-footer{
+// 	height: 100px;
+// 	width: 100%;
+// 	position: absolute;
+// 	bottom: 0;
+// 	z-index: -100;
+// }
 
 .footer-inner{
 	overflow: hidden;
@@ -277,11 +277,9 @@ footer{
 
 #video-controls{
 	float: left;
-	height: 100%;/*50px*/
-	// width: 400px;
+	height: 50px;
 	width: 33.33333%;
 	padding-top: 24px;
-	border-right: 1px solid $grey;
 
 	p{
 		display: inline-block;
@@ -304,6 +302,8 @@ footer{
 	text-indent: -200%;
 	overflow: hidden;
 	background: url(../images/play.png) no-repeat;
+	vertical-align: top;
+	display: inline-block;
 }
 
 /*style the range sliders*/
@@ -311,25 +311,52 @@ input[type=range]{
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	height: 1px;
+	height: 5px;
 	width: 250px;
-	// margin-bottom: 40px;
-	line-height: 100px;
-	vertical-align: middle;
-	background: $black;
-	// border-top: 1px solid $white;
+	margin-top: 25px;
+	vertical-align: top;
+	background: none;
+	 border-top: 1px solid $white;
+	opacity: .3;
+	outline: none;
+}
+
+input[type=range]::-moz-range-track{
+	-moz-appearance: none;
+	appearance: none;
+	height: 0px;
+	width: 250px;
+	border: 0;
+	vertical-align: top;
+	background: none;
 	opacity: .3;
 	outline: none;
 }
 
 input[type='range']::-webkit-slider-thumb {  
     -webkit-appearance: none;  
+    -moz-appearance: none;
+    appearance: none; 
     background-color: #444;  
     width: 14px;  
-    height: 14px; 
+    height: 14px;
+    margin-bottom: 9px; 
     border-radius: 20px; 
     border: 1px solid $white; 
 }  
+
+input[type='range']::-moz-range-thumb{
+	-webkit-appearance: none;  
+    -moz-appearance: none;
+    appearance: none; 
+    background: none;
+    background-color: #444;  
+    width: 14px;  
+    height: 14px;
+    margin-bottom: 9px; 
+    border-radius: 20px; 
+    border: 1px solid $white;
+}
 
 p.title-display, .display{
 	height: 0;
@@ -350,8 +377,7 @@ p.title-display, .display{
 	height: 100%;
 	width: 33%;
 	margin: 0 auto;
-	// overflow: hidden;
-	// clear: both;
+	border-left: 1px solid $grey;
 }
 
 #clips{

@@ -14,21 +14,21 @@
 	<link type="text/plain" rel="author" href="/humans.txt" />
 	<link rel="shortcut icon" href="http://adamshields.com/favicon.ico" />
 	<link rel="stylesheet" href="css/main.css" />
-
+	
+	<!-- adds modernizer to assist in browser detection for html5 video src swapping -->
+	<!-- <script src="js/modernizr.custom.30046.js"></script> -->
 
 
 </head>
 	<body>	
 
 		<div id="bg-container">
-			<video id="video" poster="">
-				
-			</video>
+			
 		</div><!-- /#bg-container-->
 		
 		<!-- loading gif-->
 		<div id="loading">
-			<img src="images/loading.gif" alt="loading gif">
+			<img src="images/loading1.gif" alt="loading gif">
 			<p>Your file is being converted. Please be patient. Do not hit the back button, or refresh this page. The world will explode!</p>
 		</div><!-- /#loading-->
 

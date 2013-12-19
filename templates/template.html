@@ -1,8 +1,24 @@
 <div>
 
 
+<script type="text/x-handlebars-template" id="bg-vid">
+	<video id="video" poster="">
 
+		<source id="fb-mp4" src="" type="video/mp4" />
+		<source id="fb-webm" src="" type="video/webm" />
+		<source id="fb-ogv" src="" type="video/ogv" />
 
+			<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">
+				<param id="fb-flv" name="movie" value="" />
+				<param name="allowFullScreen" value="true" />
+				<param name="wmode" value="transparent" />
+				<param name="flashVars" value="config={}" />
+				<img id="fb-flv_img" alt="" src="" title="No video playback capabilities, please download the video instead." />
+			</object>
+
+		Your browser does not support video. Is it Internet Explorer 3??
+	</video>
+</script>
 
 
 
@@ -14,7 +30,7 @@
 			<div class="form-wrapper">
 				<img class="close-modal-x" src="images/x.png" alt="close modal icon" />
 
-				<h2>Drop .mp4 Video File Here</h2>
+				<h2>Drop .mp4 Video File Below</h2>
 				<p class="drop-inst">Click box if your browser doesn't support dropping</p>
 
 				<div class="drop-area">

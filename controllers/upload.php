@@ -42,7 +42,7 @@ if(isset($_FILES['file'])){
 	$mp4_jpgPoster = $ffmpegPath . ' -ss 00:00:02 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -frames:v 1 ' . $sitePath . 'uploads/poster/' . $filename . '.jpg 2>&1';
 	$mp4_jpgShot1 = $ffmpegPath . ' -ss 00:00:02 -t 00:00:10 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '1.jpg 2>&1';
 	$mp4_jpgShot2 = $ffmpegPath . ' -ss 00:00:13 -t 00:00:19 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '2.jpg 2>&1';
-	$mp4_jpgShot3 = $ffmpegPath . ' -ss 00:00:21 -t 00:00:28 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '3.jpg 2>&1';
+	$mp4_jpgShot3 = $ffmpegPath . ' -ss 00:00:21 -t 00:00:25 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '3.jpg 2>&1';
 
 //ffmpeg -i input.flv -vcodec libvpx -acodec libvorbis output.webm
 	//file paths
