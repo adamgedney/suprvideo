@@ -49,8 +49,16 @@ video{
 	z-index: -1000;
 }
 
-#site-container{
-
+#loading{
+	width: 400px;
+	height: 150px;
+	padding-top: 18px;
+	text-align: center;
+	margin: 8% auto;
+	font-weight: 700;
+	font-size: 1.8em;
+	background: rgba(19,19,19, 0.8);
+	border-radius: 2px; 
 }
 
 #vid-button{ 
@@ -317,6 +325,11 @@ input[type='range']::-webkit-slider-thumb {
 	width: 255px;
 	overflow: hidden;
 	white-space: nowrap;
+
+	
+}
+
+#slider{
 
 	img{
 		display: inline;

@@ -25,7 +25,14 @@
 			<video id="video" poster="">
 			</video>
 		</div><!-- /#bg-container-->
-			
+		
+		<!-- loading gif-->
+		<div id="loading">
+			<img src="images/loading.gif" alt="loading gif">
+			<p>Your file is being converted. Please be patient. Or not... ;)</p>
+		</div><!-- /#loading-->
+
+		<!-- upload modal button-->	
 		<a href="#" id="vid-button" />+ Add Video</a>
 		
 		<div id="site-container">

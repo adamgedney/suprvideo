@@ -76,12 +76,6 @@ if(isset($_FILES['file'])){
 		//adds video & still paths to database
 		$model->add_Video($mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title);
 		
-
-		//redirects to root after video conversion to clear loading gif
-		//and reload page to show new videos.
-		if($model){
-			header('Location: /');
-		}
 	}// if $move
 
 

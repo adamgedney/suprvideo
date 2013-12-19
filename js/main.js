@@ -3,6 +3,8 @@ $(function(){
 //NOTES:  
 //fix the seek bar. Makes it's max val = to the length of the video
 //set seek bar timedisplay to video duration on load
+//
+//add titles to front end above clips and shots "Your Videos" & "Chanel"<--title of movie
 
 
 //-----------templating---------------
@@ -23,9 +25,18 @@ $.get('/templates/template.html', function(htmlArg){
 	$('.desc').hide();
 	$('.form-wrapper').hide();
 	$('#upload-success').hide();
+	$('#loading').hide();
 
 
  
+
+
+
+
+
+
+
+
 
 //********get and load all videos upon program init********
 $.ajax({
@@ -41,11 +52,13 @@ $.ajax({
 	var lng = vids.length;
 	for(var i=0; i < lng; i++){
 		var img = '<img class= "video-thumb" id="' + vids[i].id +'" src="' + vids[i].shot_1 + '" alt="videos stored">';
-		$('#clips').append(img);
+		$('#slider').append(img);
 	};
 
 
-console.log(response , "this is the db call repsonse");
+
+
+
 	//loads default video SHOTS to DOM
 	var shots_init = '<a href="' + vids[0].shot_1 + '" data-lightbox="1"><img src="' + vids[0].shot_1 + '" alt="screenshot"/></a>';
 		shots_init += '<a href="' + vids[0].shot_2 + '" data-lightbox="1"><img src="' + vids[0].shot_2 + '" alt="screenshot"/></a>';
@@ -54,11 +67,18 @@ console.log(response , "this is the db call repsonse");
 	$('.shots').append(shots_init);
 
 
+
+
+
+
 	//title & description init
 	var info_init = '<h2>' + vids[0].title + '</h2>';
 		info_init += '<p>' + vids[0].desc + '</p>';
 
 	$('#desc-content').append(info_init);
+
+
+
 
 	
 											
@@ -70,8 +90,8 @@ console.log(response , "this is the db call repsonse");
 	video.src = vids[0].mp4;
 
 	//build fallbacks
-	var fallback = '<source src="' + vids[0].mov + '" type="video/mov/>';
-		fallback += '<source src="' + vids[0].ogv + '" type="video/ogv/>';
+	var fallback = '<source src="' + vids[0].mov + '" type="video/mov/>\r\n';
+		fallback += '<source src="' + vids[0].ogv + '" type="video/ogv/>\r\n';
 
 		fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">';
 		fallback += '<param name="movie" value="' + vids[0].flv + '" />';
@@ -82,11 +102,18 @@ console.log(response , "this is the db call repsonse");
 		fallback += '</object>';
 		fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
 
+	$('#video').empty();
 	$('#video').append(fallback);
 	
+
+
+
 	//sets video seek-bar duration
 	// video.load();
 	// $('#time-display').html(video.duration);
+
+
+
 
 	//runs the folder parser function that populates the dl file list
 	fileList(vids[0].title);
@@ -102,10 +129,10 @@ console.log(response , "this is the db call repsonse");
 
 
 
-$(document).on('click', '.upload-drop', function(e){
-		// $('#drop-value').html($('#upload-drop').val());
-		console.log("drop val");
-	});
+
+
+
+
 
 
 
@@ -153,6 +180,14 @@ $(window).on('keypress', function(e){
 
 
 
+
+
+
+
+
+
+
+
 function playPause(video){
 	 if (video.paused == true) {
     // Play the video
@@ -182,6 +217,10 @@ function playPause(video){
 
 
 
+
+
+
+
 // Event listener for the seek bar
 seekBar.addEventListener("change", function() {
 
@@ -192,6 +231,12 @@ seekBar.addEventListener("change", function() {
   // Update the video time
   video.currentTime = time;
 });// seek listener
+
+
+
+
+
+
 
 
 
@@ -239,7 +284,32 @@ function timeDisplay(){
 };//*******************video_init
 
 
-	
+
+
+
+
+
+
+
+
+
+//Center Video clip seek bar handler
+$(document).on('change', '#video-scroll', function(){
+	var videoScroll = document.getElementById("video-scroll");
+	var multiple = videoScroll.value * 10;
+	var val = '-' + multiple + 'px';
+
+	$('#slider').css({'marginLeft' : val});
+});
+
+
+
+
+
+
+
+
+
 
 
 //click handlers for CURRENT VIDEO selection
@@ -280,6 +350,16 @@ $(document).on('click', '.video-thumb', function(e){
 		}//success
 	});//ajax
 });//onClick .video-thumb
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -338,6 +418,16 @@ function fileList(title){
 
 
 
+
+
+
+
+
+
+
+
+
+
 //DOUBLE CLICK video to load it as BACKGROUND
 $(document).on('dblclick', '.video-thumb', function(e){
 
@@ -363,23 +453,47 @@ $(document).on('dblclick', '.video-thumb', function(e){
 			$('#video').attr("poster", vid.poster);
 			current_video.src = vid.mp4;
 
+			//build fallbacks
+			var fallback = '<source src="' + vid.mov + '" type="video/mov></source>\r\n';
+				fallback += '<source src="' + vid.ogv + '" type="video/ogv></source>\r\n';
+
+				fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">';
+				fallback += '<param name="movie" value="' + vid.flv + '" />';
+				fallback += '<param name="allowFullScreen" value="true" />';
+				fallback += '<param name="wmode" value="transparent" />';
+				fallback += '<param name="flashVars" value="config={playlist:[' + vid.poster + ',{url:' + vid.mp4 + ', autoPlay:false}]}" />';
+				fallback += '<img alt="' + vid.title + '" src="' + vid.poster + '" title="No video playback capabilities, please download the video instead." />';
+				fallback += '</object>';
+				fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
+
+			$('#video').empty();
+			$('#video').append(fallback);
 
 		}//success
 	});//ajax
 });// dblclick
 
+			
 
 
 
 
 
 
-				
+
+
+
+
+
+
+
 
 //-----------Description & download show/hide handler-----------
 var dl_toggle = true;
 var info_toggle = true;
 
+
+//download button handler
 $(document).on('click', '#dl-btn', function(e){
 	
 	if(dl_toggle){
@@ -402,6 +516,8 @@ $(document).on('click', '#dl-btn', function(e){
 
 
 
+
+//close x handler
 $(document).on('click', '.close-list-x', function(e){
 	$('.dl-list').fadeOut(1000);
 	dl_toggle = true;
@@ -412,6 +528,8 @@ $(document).on('click', '.close-list-x', function(e){
 
 
 
+
+//info button handler
 $(document).on('click', '#info-btn', function(e){
 	
 	if(info_toggle){
@@ -432,6 +550,8 @@ $(document).on('click', '#info-btn', function(e){
 
 
 
+
+//closeout x handler
 $(document).on('click', '.close-desc-x', function(e){
 	$('.desc').fadeOut(1000);
 	info_toggle = true;
@@ -442,24 +562,49 @@ $(document).on('click', '.close-desc-x', function(e){
 
 
 
+	
+
+
+
+
+
+
 
 
 
 
 //---------form show/hide handler-----------------
-
-
 $(document).on('click', '#vid-button', function(e){
 
 	$('#vid-button').hide();
 	$('.form-wrapper').show();
 });
 
+
+
+
 $(document).on('click', '.close-modal-x', function(e){
 
 	$('#vid-button').show();
 	$('.form-wrapper').hide();
 });
+
+
+
+
+//loading .gif handler
+$(document).on('click', '#form-submit', function(e){
+	$('#loading').show();
+	$('#upload-success').show();
+});
+
+
+
+
+
+
+
+
 
 
 
@@ -498,36 +643,7 @@ $(document).on('click', '.close-modal-x', function(e){
 
 
 
-//-------------------------------------------Validate form---------------------------------
-$('#submit-btn').on("click", function(e){
 
-	var email = $('#con-email').val();
-	var phone = $('#con-phone').val();
-	var message = $('#con-message').val();
-
-	var emailPat = /^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/; // standard email validation
-	var phonePat = /^[2-9]\d{2}-\d{3}-\d{4}$/; //845-216-5030 
-
-
-	//contact form validation conditions
-	if(!emailPat.test(email)){
-
-		e.preventDefault();
-		$('[name=email]').css('background', '#ff0000');
-	}else if(!phonePat.test(phone)){
-
-		e.preventDefault();
-		$('[name=phone]').css('background', '#ff0000');
-	}else if(message == "" || message == null){
-
-		e.preventDefault();
-		$('[name=message]').css('background', '#ff0000');
-	}else{
-
-		return "true";
-	}
-
-});// Validate
 
 
 
