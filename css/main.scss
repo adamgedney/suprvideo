@@ -367,8 +367,8 @@ p.title-display, .display{
 	text-shadow: 1px 1px 1px $dark-grey;
 }
 
-.display{
-	margin: 12px 0 0 9px;
+.display, .title-display{
+	margin: 18px 0 9px 9px;
 }
 
 .clip-container{
