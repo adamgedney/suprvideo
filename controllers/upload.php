@@ -29,9 +29,9 @@ if(isset($_FILES['file'])){
 	//to various formats, saving them in their proper directory.
 	$filename = substr($file['name'], 0, -4);
 	// $ffmpegPath = "/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg";//local
-	$ffmpegPath = "/usr/share/doc/ffmpeg";//server
+	$ffmpegPath = "/ffmpeg";//server
 	// $ffmpeg2theoraPath = "/usr/local/bin/ffmpeg2theora";//local
-	$ffmpeg2theoraPath = "/usr/share/doc/ffmpeg2theora";//server
+	$ffmpeg2theoraPath = "/ffmpeg2theora";//server
 	// $sitePath = "/Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/";//local
 	$sitePath = "/var/www/";//server
 
