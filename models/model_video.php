@@ -31,7 +31,7 @@ Class Model_Video{
 
 		$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
 		// $db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","bhangra1");
-//test comment
+
 
 		$st = $db->prepare("SELECT * FROM videos WHERE id = :vid_id");
 		$st->execute(array(":vid_id"=>$vid_id));
