@@ -57,7 +57,7 @@ video{
 	margin: 8% auto;
 	font-weight: 700;
 	font-size: 1.2em;
-	background: rgba(19,19,19, 0.8);
+	background: rgba(34,34,34, 1);
 	border-radius: 2px; 
 }
 
@@ -188,7 +188,7 @@ video{
 	ul{
 		position: relative;
 		height: 125px;
-		overflow: scroll;
+		overflow-y: scroll;
 
 		li{
 			// border-bottom: 1px solid $white;
@@ -421,6 +421,7 @@ p.title-display, .display{
 	display: inline-block;
 	text-align: center;
 	float: right;
+	max-width: 100%;
 
 	img{
 		max-width: 83px;
@@ -434,6 +435,7 @@ p.title-display, .display{
 	margin: 0 18px;
 	float: right;
 	padding-top: 18px;
+
 }
 
 /*--------------------------------Media Queries------------------------*/

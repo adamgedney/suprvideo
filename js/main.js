@@ -385,12 +385,11 @@ function fileList(title){
 			$('#file-list').empty();
 			$('#audio-dl').empty();
 
-console.log(v , "video list");
 			
 			//loops through video results
 			for(var j=0;j<v.length;j++){
 				var name = v[j];
-				
+
 				//title less 4 or 5 char to remove extension
 				var t4 = name.substring(0,v[j].length - 4);
 				var t5 = name.substring(0,v[j].length - 5);
