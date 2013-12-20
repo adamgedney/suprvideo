@@ -9,7 +9,7 @@ Class Model_Video{
 	public function get_All_Videos(){
 
 		$db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
-		// $db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","bhangra1");
+		// $db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","SERVER PASSWORD HERE");
 
 
 		$st = $db->prepare("SELECT * FROM videos");
