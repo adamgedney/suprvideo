@@ -28,7 +28,8 @@ if(isset($_FILES['file'])){
 	//after file has uploaded, ffmpeg converts mp4 in uploads directory
 	//to various formats, saving them in their proper directory.
 	$filename = substr($file['name'], 0, -4);
-	$ffmpegPath = "/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg";
+	// $ffmpegPath = "/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg";
+	$ffmpegPath = "/usr/local/bin/ffmpeg";
 	$ffmpeg2theoraPath = "/usr/local/bin/ffmpeg2theora";
 	$sitePath = "/Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/";
 
