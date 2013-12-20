@@ -51,7 +51,7 @@ $.ajax({
 
 
 
-	
+
 	var vids = response.videos
 
 	//loops through screenshots to grab the first shot from each DB video
@@ -64,14 +64,15 @@ $.ajax({
 
 
 
-
-
 	//loads default video SHOTS to DOM
 	var shots_init = '<a href="' + vids[0].shot_1 + '" data-lightbox="1"><img src="' + vids[0].shot_1 + '" alt="screenshot"/></a>';
 		shots_init += '<a href="' + vids[0].shot_2 + '" data-lightbox="1"><img src="' + vids[0].shot_2 + '" alt="screenshot"/></a>';
 		shots_init += '<a href="' + vids[0].shot_3 + '" data-lightbox="1"><img src="' + vids[0].shot_3 + '" alt="screenshot"/></a>';
 	
 	$('.shots').append(shots_init);
+
+
+	//adds video title above screenshots
 	$('.title-display').html(vids[0].title);
 
 
@@ -96,6 +97,7 @@ $.ajax({
 	//video.src = vids[0].webm;
 	$('#video').attr("poster", vids[0].poster);
 
+	//builds fallbacks
 	$('#fb-mp4').attr('src', vids[0].mp4);
 	$('#fb-webm').attr('src', vids[0].webm);
 	$('#fb-ogv').attr('src', vids[0].ogv);
@@ -106,25 +108,6 @@ $.ajax({
 		});
 
 	video.load();
-
-	//build fallbacks
-	// var fallback = '<source src="' + vids[0].webm + '" type="video/webm" />' + '\n';
-	// 	fallback += '<source src="' + vids[0].mp4 + '" type="video/mp4" />' + '\n';
-	// 	fallback += '<source src="' + vids[0].ogv + '" type="video/ogv" />' + '\n';
-
-	// 	fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">' + '\n';
-	// 	fallback += '<param name="movie" value="' + vids[0].flv + '" />' + '\n';
-	// 	fallback += '<param name="allowFullScreen" value="true" />' + '\n';
-	// 	fallback += '<param name="wmode" value="transparent" />' + '\n';
-	// 	fallback += '<param name="flashVars" value="config={playlist:[' + vids[0].poster + ',{url:' + vids[0].mp4 + ', autoPlay:false}]}" />' + '\n';
-	// 	fallback += '<img alt="' + vids[0].title + '" src="' + vids[0].poster + '" title="No video playback capabilities, please download the video instead." />' + '\n';
-	// 	fallback += '</object>' + '\n';
-	// 	fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
-
-	// $('#video').empty();
-	// $('#video').append(fallback);
-	
-
 
 	//runs the folder parser function that populates the dl file list
 	fileList(vids[0].title);
@@ -151,40 +134,41 @@ $.ajax({
 
 
 //--------------Video Controls Handler-----------------
-function video_init(){
-
-
-	
+function video_init(){	
 // inspiration: http://blog.teamtreehouse.com/building-custom-controls-for-html5-videos    
 
-// Video
-var video = document.getElementById("video");
-var seekBar = document.getElementById("seek-bar");
+	// Video
+	var video = document.getElementById("video");
+	var seekBar = document.getElementById("seek-bar");
 
 
 
-// Event listener for the play/pause button
-$(document).on('click', '#play-pause', function(){
+	// Event listener for the play/pause button
+	$(document).on('click', '#play-pause', function(){
 
-	playPause(video);
- 
-});// listener playButton
-
-
-//Event listener for video element play/pause control
-$(document).on('click', '#video', function() {
-
-  playPause(video);
-
-});// onCLick #video
-
-
-//listens for spacebar press to toggle play/pause
-$(window).on('keypress', function(e){
-	if(e.charCode == 32){
 		playPause(video);
-	}
-});
+	 
+	});// listener playButton
+
+
+
+
+	//Event listener for video element play/pause control
+	$(document).on('click', '#video', function() {
+
+	  playPause(video);
+
+	});// onCLick #video
+
+
+
+
+	//listens for spacebar press to toggle play/pause
+	$(window).on('keypress', function(e){
+		if(e.charCode == 32){
+			playPause(video);
+		}
+});//video_init()
 
 
 
@@ -198,7 +182,7 @@ $(window).on('keypress', function(e){
 
 
 
-
+//Play Pause handler
 function playPause(video, seekBar){
 	 if (video.paused == true) {
     // Play the video
@@ -401,15 +385,18 @@ function fileList(title){
 			$('#file-list').empty();
 			$('#audio-dl').empty();
 
-
+console.log(v , "video list");
 			
 			//loops through video results
 			for(var j=0;j<v.length;j++){
 				var name = v[j];
-				var t = name.substring(0,v[j].length - 4);
+				
+				//title less 4 or 5 char to remove extension
+				var t4 = name.substring(0,v[j].length - 4);
+				var t5 = name.substring(0,v[j].length - 5);
 
 				//only populates where file is the same as clicked video
-				if(t == title){
+				if(t4 == title || t5 == title){
 					var html = '<li><a href="uploads/' + name + '"><img class="dl-list-reel" src="images/reel.png" alt="movie icon"/>' + name + '<img class="dl-list-icon" src="images/cloud.png" alt="download link"/></a><li>';
 
 					$('#file-list').append(html);
@@ -464,15 +451,15 @@ $(document).on('dblclick', '.video-thumb', function(e){
 
 			var vid = response.video[0];
 			
-			// var current_video = document.getElementById("video");
+			var current_video = document.getElementById("video");
 
 			// //sets video seek-bar duration
-			// $('#time-display').html(current_video.duration;
+			$('#time-display').html(current_video.duration);
 
 			//loads BACKGROUND VIDEO to DOM
 			$('#video').attr("poster", vid.poster);
-			// current_video.src = vid.mp4;
 
+			//builds fallbacks
 			$('#fb-mp4').attr('src', vid.mp4);
 			$('#fb-webm').attr('src', vid.webm);
 			$('#fb-ogv').attr('src', vid.ogv);
@@ -484,23 +471,7 @@ $(document).on('dblclick', '.video-thumb', function(e){
 
 			video.load();
 
-
-			// //build fallbacks
-			// var fallback = '<source src="' + vid.webm + '" type="video/webm" />' + '\n';
-			// 	fallback += '<source src="' + vid.mp4 + '" type="video/mp4" />' + '\n';
-			// 	fallback += '<source src="' + vid.ogv + '" type="video/ogv" />' + '\n';
-			// 	fallback += '<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">' + '\n';
-			// 	fallback += '<param name="movie" value="' + vid.flv + '" />' + '\n';
-			// 	fallback += '<param name="allowFullScreen" value="true" />' + '\n';
-			// 	fallback += '<param name="wmode" value="transparent" />' + '\n';
-			// 	fallback += '<param name="flashVars" value="config={playlist:[' + vid.poster + ',{url:' + vid.mp4 + ', autoPlay:false}]}" />' + '\n';
-			// 	fallback += '<img alt="' + vid.title + '" src="' + vid.poster + '" title="No video playback capabilities, please download the video instead." />' + '\n';
-			// 	fallback += '</object>' + '\n';
-			// 	fallback += '<p>Your browser does not support video. Is it Internet Explorer 3??</p>';
-
-			// $('#video').empty();
-			// $('#video').append(fallback);
-
+			//displays title above screenshots
 			$('.title-display').html(vid.title);
 
 		}//success
