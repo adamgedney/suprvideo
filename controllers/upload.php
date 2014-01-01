@@ -91,13 +91,13 @@ if(isset($_FILES['file'])){
 		}else{
 			$e = "last_process failed";
 			$e += $last_process;
-			var_dump($e);
+			echo $e;
 		}
 
 	}else{
 		$ee = "move failed";
 		$ee += $move;
-		var_dump($ee);
+		echo $ee;
 	}// if $move
 
 
