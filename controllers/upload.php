@@ -90,13 +90,13 @@ if(isset($_FILES['file'])){
 			header('Location: /');
 		}else{
 			$e = "last_process failed";
-			$e += $last_process;
+			$e .= $last_process;
 			echo $e;
 		}
 
 	}else{
 		$ee = "move failed";
-		$ee += $move;
+		$ee .= $move;
 		echo $ee;
 	}// if $move
 
