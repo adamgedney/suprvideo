@@ -15,7 +15,7 @@ if(isset($_FILES['file'])){
 
 	$file = $string;
 	$tempfile = $file["tmp_name"];
-	$dir = "uploads/".$file['name'];
+	$dir = "/var/www/uploads/".$file['name'];
 
 	//grabs file from temp, saves to server
 	$move = move_uploaded_file($tempfile,$dir);
@@ -89,11 +89,15 @@ if(isset($_FILES['file'])){
 		if($last_process){
 			header('Location: /');
 		}else{
-			var_dump($last_process);
+			$e = "last_process failed";
+			$e += $last_process;
+			var_dump($e);
 		}
 
 	}else{
-		var_dump($move);
+		$ee = "move failed";
+		$ee += $move;
+		var_dump($ee);
 	}// if $move
 
 
