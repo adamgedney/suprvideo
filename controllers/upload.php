@@ -83,7 +83,7 @@ if(isset($_FILES['file'])){
 
 		//adds video & still paths to database
 		$model->add_Video($webm, $mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title);
-		echo "success";
+		var_dump($first_process);
 		//strips actions from URL by reloading site after complete conversions
 		// if($last_process){
 		// 	// var_dump($last_process);
