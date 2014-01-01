@@ -87,6 +87,7 @@ if(isset($_FILES['file'])){
 		
 		//strips actions from URL by reloading site after complete conversions
 		if($last_process){
+			var_dump($last_process);
 			header('Location: /');
 		}else{
 			$e = "last_process failed";
