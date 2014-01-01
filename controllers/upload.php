@@ -85,14 +85,14 @@ if(isset($_FILES['file'])){
 		$model->add_Video($webm, $mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title);
 		echo "success";
 		//strips actions from URL by reloading site after complete conversions
-		if($last_process){
-			// var_dump($last_process);
-			header('Location: /');
-		}else{
-			$e = "last_process failed";
-			$e .= $last_process;
-			echo $e;
-		}
+		// if($last_process){
+		// 	// var_dump($last_process);
+		// 	header('Location: /');
+		// }else{
+		// 	$e = "last_process failed";
+		// 	$e .= $last_process;
+		// 	echo $e;
+		// }
 
 	}else{
 		$ee = "move failed";
