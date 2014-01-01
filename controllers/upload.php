@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+
 require 'models/model_video.php';
 $model = new Model_Video();
 
