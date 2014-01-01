@@ -20,9 +20,10 @@
                         
 
     /* SITE */
-    Project Start: 03/31/2013
-    Standards: HTML5, CSS3, SASS, JS, JQuery..
-    Software: GitHub, Sublime Text 2, Fetch, CodeKit
+    Project Start: 12/14/2013
+    Standards: PHP, HTML5, CSS3, SASS, JS, JQuery..
+    Software: Git, Sublime Text 2, CodeKit, ffmpeg
+    Plugins: lightbox.js, handlebars.js
 
 
                     

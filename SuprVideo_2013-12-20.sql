@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.25)
 # Database: SuprVideo
-# Generation Time: 2013-12-20 02:50:21 +0000
+# Generation Time: 2013-12-20 17:51:52 +0000
 # ************************************************************
 
 
@@ -22,6 +22,8 @@
 
 # Dump of table videos
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `videos`;
 
 CREATE TABLE `videos` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -53,9 +55,9 @@ VALUES
 	(121,'uploads/IceCreamCom.WebM','uploads/IceCreamCom.mp4','uploads/IceCreamCom.mov','uploads/IceCreamCom.ogv','uploads/IceCreamCom.flv','uploads/IceCreamCom.mp3','uploads/shots/IceCreamCom1.jpg','uploads/shots/IceCreamCom2.jpg','uploads/shots/IceCreamCom3.jpg','uploads/poster/IceCreamCom.jpg','IceCreamCom','The rain set early in tonight, The sullen wind was soon awake, It tore\nthe elm-tops down for spite, And did its worst to vex the lake: I\nlistened with heart fit to break. When glided in Porphyria; straight\nShe shut the cold out and the storm, And kneeled and made the\ncheerless grate '),
 	(122,'uploads/BritCom.WebM','uploads/BritCom.mp4','uploads/BritCom.mov','uploads/BritCom.ogv','uploads/BritCom.flv','uploads/BritCom.mp3','uploads/shots/BritCom1.jpg','uploads/shots/BritCom2.jpg','uploads/shots/BritCom3.jpg','uploads/poster/BritCom.jpg','BritCom','The rain set early in tonight, The sullen wind was soon awake, It tore\nthe elm-tops down for spite, And did its worst to vex the lake: I\nlistened with heart fit to break. When glided in Porphyria; straight\nShe shut the cold out and the storm, And kneeled and made the\ncheerless grate '),
 	(123,'uploads/FunnyJapCom.WebM','uploads/FunnyJapCom.mp4','uploads/FunnyJapCom.mov','uploads/FunnyJapCom.ogv','uploads/FunnyJapCom.flv','uploads/FunnyJapCom.mp3','uploads/shots/FunnyJapCom1.jpg','uploads/shots/FunnyJapCom2.jpg','uploads/shots/FunnyJapCom3.jpg','uploads/poster/FunnyJapCom.jpg','FunnyJapCom','The rain set early in tonight, The sullen wind was soon awake, It tore\nthe elm-tops down for spite, And did its worst to vex the lake: I\nlistened with heart fit to break. When glided in Porphyria; straight\nShe shut the cold out and the storm, And kneeled and made the\ncheerless grate '),
-	(124,'uploads/OldSpice.WebM','uploads/OldSpice.mp4','uploads/OldSpice.mov','uploads/OldSpice.ogv','uploads/OldSpice.flv','uploads/OldSpice.mp3','uploads/shots/OldSpice1.jpg','uploads/shots/OldSpice2.jpg','uploads/shots/OldSpice3.jpg','uploads/poster/OldSpice.jpg','OldSpice','The rain set early in tonight, The sullen wind was soon awake, It tore\nthe elm-tops down for spite, And did its worst to vex the lake: I\nlistened with heart fit to break. When glided in Porphyria; straight\nShe shut the cold out and the storm, And kneeled and made the\ncheerless grate '),
 	(125,'uploads/ThaiTV.WebM','uploads/ThaiTV.mp4','uploads/ThaiTV.mov','uploads/ThaiTV.ogv','uploads/ThaiTV.flv','uploads/ThaiTV.mp3','uploads/shots/ThaiTV1.jpg','uploads/shots/ThaiTV2.jpg','uploads/shots/ThaiTV3.jpg','uploads/poster/ThaiTV.jpg','ThaiTV','The rain set early in tonight, The sullen wind was soon awake, It tore\nthe elm-tops down for spite, And did its worst to vex the lake: I\nlistened with heart fit to break. When glided in Porphyria; straight\nShe shut the cold out and the storm, And kneeled and made the\ncheerless grate '),
-	(126,'uploads/JapanCom.WebM','uploads/JapanCom.mp4','uploads/JapanCom.mov','uploads/JapanCom.ogv','uploads/JapanCom.flv','uploads/JapanCom.mp3','uploads/shots/JapanCom1.jpg','uploads/shots/JapanCom2.jpg','uploads/shots/JapanCom3.jpg','uploads/poster/JapanCom.jpg','JapanCom','The rain set early in tonight, The sullen wind was soon awake, It tore\nthe elm-tops down for spite, And did its worst to vex the lake: I\nlistened with heart fit to break. When glided in Porphyria; straight\nShe shut the cold out and the storm, And kneeled and made the\ncheerless grate ');
+	(126,'uploads/JapanCom.WebM','uploads/JapanCom.mp4','uploads/JapanCom.mov','uploads/JapanCom.ogv','uploads/JapanCom.flv','uploads/JapanCom.mp3','uploads/shots/JapanCom1.jpg','uploads/shots/JapanCom2.jpg','uploads/shots/JapanCom3.jpg','uploads/poster/JapanCom.jpg','JapanCom','The rain set early in tonight, The sullen wind was soon awake, It tore\nthe elm-tops down for spite, And did its worst to vex the lake: I\nlistened with heart fit to break. When glided in Porphyria; straight\nShe shut the cold out and the storm, And kneeled and made the\ncheerless grate '),
+	(129,'uploads/OldSpice.WebM','uploads/OldSpice.mp4','uploads/OldSpice.mov','uploads/OldSpice.ogv','uploads/OldSpice.flv','uploads/OldSpice.mp3','uploads/shots/OldSpice1.jpg','uploads/shots/OldSpice2.jpg','uploads/shots/OldSpice3.jpg','uploads/poster/OldSpice.jpg','OldSpice',NULL);
 
 /*!40000 ALTER TABLE `videos` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 	<title>Suprvideo</title>
 	<meta charset="utf-8" />
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
@@ -14,10 +15,6 @@
 	<link type="text/plain" rel="author" href="/humans.txt" />
 	<link rel="shortcut icon" href="http://adamshields.com/favicon.ico" />
 	<link rel="stylesheet" href="css/main.css" />
-	
-	<!-- adds modernizer to assist in browser detection for html5 video src swapping -->
-	<!-- <script src="js/modernizr.custom.30046.js"></script> -->
-
 
 </head>
 	<body>	
@@ -33,7 +30,7 @@
 		</div><!-- /#loading-->
 
 		<!-- upload modal button-->	
-		<a href="#" id="vid-button" title="Convert your .mp4 to .webm, .mov, .flv, .ogv, .mp3"/>+ Add Video</a>
+		<a href="#" id="vid-button" title="Convert your .mp4 to .webm, .mov, .flv, .ogv, .mp3">+ Add Video</a>
 		
 		<div id="site-container">
 		</div><!-- /#site-container-->

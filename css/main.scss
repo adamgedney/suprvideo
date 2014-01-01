@@ -1,4 +1,4 @@
-/* 	Copyright Adam Gedney 12/2/13
+/* 	Copyright Adam Gedney 12/14/13
 	contact: adam.gedney@gmail.com
 	http://adamgedney.com
 
@@ -136,10 +136,6 @@ video{
 	vertical-align: bottom;
 	-moz-vertical-align: baseline;
 	clip:rect(0px,700px, 400px,202px);//removes button from view in firefox
-
-	// label{
-	// 	padding-left: 300px;
-	// }
 }
 
 .drop-area{
@@ -177,7 +173,6 @@ video{
 	border-radius: 2px;
 	position: absolute;
 	right: 2%;
-	// bottom: 600;
 	margin-top: -318px;// forces container over video
 	display: inline-block;
 	z-index: 100;
@@ -191,7 +186,6 @@ video{
 		overflow-y: scroll;
 
 		li{
-			// border-bottom: 1px solid $white;
 			line-height: 36px;
 			padding-top: 3px;
 		}
@@ -210,7 +204,6 @@ video{
 }
 
 .dl-list-icon{
-	// float: right;
 	position: absolute;
 	right: 0;
 -webkit-transform:scale(0.7);
@@ -261,14 +254,6 @@ footer{
 		box-shadow: 0px -3px 5px 0px rgba(37,37,37,0.67);
 
 }
-
-// .pseudo-footer{
-// 	height: 100px;
-// 	width: 100%;
-// 	position: absolute;
-// 	bottom: 0;
-// 	z-index: -100;
-// }
 
 .footer-inner{
 	overflow: hidden;
@@ -386,7 +371,6 @@ p.title-display, .display{
 	padding-top: 12px;
 	margin: 0 auto;
 	width: 255px;
-	// height: 60px;
 	overflow: hidden;
 	white-space: nowrap;
 }
@@ -426,7 +410,6 @@ p.title-display, .display{
 	img{
 		max-width: 83px;
 		margin-right: 3px;
-		// padding-top: 18px;
 	}
 }
 
@@ -437,96 +420,6 @@ p.title-display, .display{
 	padding-top: 18px;
 
 }
-
-/*--------------------------------Media Queries------------------------*/
-/*
-*/
-/*--------------------------------Media Queries------------------------*/
-
-
-
-
-
-/* Smartphones  ----------- */
-@media only screen 
-and (min-width : 480px) {
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen 
-and (min-width : 750px) {
-
-}/*min-width 750*/
-
-
-
-
-
-
-
-
-
-//adjusts header nav after JS removes slide in menu
-@media only screen 
-and (min-width : 769px) {
-
-
-}
-
-
-
-
-
-
-
-
-
-/* Desktops and laptops ----------- */
-@media only screen 
-and (min-width : 837px) {
-
-}
-
-
-
-@media only screen 
-and (min-width : 960px) {
-
-}
-
-
-
-/* Desktops ---------------------- */
-@media only screen 
-and (min-width : 1140px) {
-
-}
-
-
-
-
-
-
-/* Large screens ----------- */
-@media only screen 
-and (min-width : 1824px) {
-/* Styles */
-}
-
-
 
 
 

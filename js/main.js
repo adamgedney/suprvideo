@@ -612,43 +612,6 @@ $(document).on('change', '#upload-drop', function(){
 
 
 
-
-
-
-
-
-
-
-//-----------------Mousemove fadein/fadeout footer handler-------------------------
-// $(document).on('mouseover', '.pseudo-footer', function(){
-// 	// console.log('mouseover running');
-
-// 	$('footer').show();
-// 	$('#vid-button').show();
-// });
-
-// $(document).on('mouseover', 'footer', function(){
-// 	// console.log('mouseover running');
-
-// 	$('footer').show();
-// 	$('#vid-button').show();
-// });
-
-// $(document).on('mouseout', 'footer', function(){
-// 	// console.log('mouseover running');
-// 	$('footer').fadeOut(100);
-// 	$('#vid-button').fadeOut(100);
-// });
-
-
-
-
-
-
-
-
-
-
 });//get
 
 });// function
