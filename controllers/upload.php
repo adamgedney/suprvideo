@@ -81,8 +81,6 @@ if(isset($_FILES['file'])){
 		shell_exec($mp4_jpgShot2);
 		$last_process = shell_exec($mp4_jpgShot3);
 
-		var_dump($first_process);
-		echo "what?" . $first_process;
 		//adds video & still paths to database
 		// $model->add_Video($webm, $mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title);
 		
@@ -103,7 +101,7 @@ if(isset($_FILES['file'])){
 	}// if $move
 
 
-
+var_dump($first_process);
 
 
 
