@@ -88,8 +88,12 @@ if(isset($_FILES['file'])){
 		//strips actions from URL by reloading site after complete conversions
 		if($last_process){
 			header('Location: /');
+		}else{
+			var_dump($last_process);
 		}
 
+	}else{
+		var_dump($move);
 	}// if $move
 
 
