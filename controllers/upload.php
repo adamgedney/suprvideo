@@ -28,12 +28,12 @@ if(isset($_FILES['file'])){
 	//after file has uploaded, ffmpeg converts mp4 in uploads directory
 	//to various formats, saving them in their proper directory.
 	$filename = substr($file['name'], 0, -4);
-	$ffmpegPath = "/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg";//local
-	// $ffmpegPath = "/ffmpeg";//server
-	$ffmpeg2theoraPath = "/usr/local/bin/ffmpeg2theora";//local
-	// $ffmpeg2theoraPath = "/ffmpeg2theora";//server
-	$sitePath = "/Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/";//local
-	// $sitePath = "/var/www/";//server
+	// $ffmpegPath = "/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg";//local
+	$ffmpegPath = "/../ffmpeg";//server
+	// $ffmpeg2theoraPath = "/usr/local/bin/ffmpeg2theora";//local
+	$ffmpeg2theoraPath = "/../ffmpeg2theora";//server
+	// $sitePath = "/Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/";//local
+	$sitePath = "/var/www/";//server
 
 	//ffmpeg shell scripts
 	// $mp4_water = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/' . $filename . '.mp4 -y /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/images/logo.png -filter_complex overlay /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/' . $filename . '.mp4 2>&1';
