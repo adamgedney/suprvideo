@@ -46,7 +46,7 @@ if(isset($_FILES['file'])){
 	$mp4_flv = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -ar 44100 -ab 96 -f flv ' . $sitePath . 'uploads/' . $filename . '.flv 2>&1';
 	$mp4_mp3 = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -vn -ar 44100 -ac 2 -ab 192 -f mp3 ' . $sitePath . 'uploads/' . $filename . '.mp3 2>&1';
 	// $mp4_jpgPoster = $ffmpegPath . ' -ss 00:00:02 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -frames:v 1 ' . $sitePath . 'uploads/poster/' . $filename . '.jpg 2>&1';
-	$mp4_jpgPoster = $ffmpegPath . ' -ss 00:00:08 -t 00:00:07 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/poster/' . $filename . '.jpg 2>&1';
+	$mp4_jpgPoster = $ffmpegPath . ' -ss 00:00:02 -t 00:00:07 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '.jpg 2>&1';
 	$mp4_jpgShot1 = $ffmpegPath . ' -ss 00:00:03 -t 00:00:05 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '1.jpg 2>&1';
 	$mp4_jpgShot2 = $ffmpegPath . ' -ss 00:00:06 -t 00:00:09 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '2.jpg 2>&1';
 	$mp4_jpgShot3 = $ffmpegPath . ' -ss 00:00:10 -t 00:00:15 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '3.jpg 2>&1';
@@ -62,7 +62,7 @@ if(isset($_FILES['file'])){
 	$shot1 = "uploads/shots/". $filename . "1.jpg";
 	$shot2 = "uploads/shots/". $filename . "2.jpg";
 	$shot3 = "uploads/shots/". $filename . "3.jpg";
-	$poster = "uploads/poster/". $filename . ".jpg";
+	$poster = "uploads/shots/". $filename . ".jpg";
 	$title = $filename;
 
 
