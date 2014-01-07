@@ -21,7 +21,7 @@ if(isset($_FILES['file'])){
 
 	$file = $string;
 	$tempfile = $file["tmp_name"];
-	$dir = $sitePath . "uploads/".$file['name'];
+	$dir = "/var/www/uploads/".$file['name'];
 
 	//grabs file from temp, saves to server
 	$move = move_uploaded_file($tempfile,$dir);
@@ -35,7 +35,7 @@ if(isset($_FILES['file'])){
 	//to various formats, saving them in their proper directory.
 	$filename = substr($file['name'], 0, -4);
 	$format = substr($file['name'], -4); //grabs uploaded video format
-	
+
 	// $ffmpegPath = "/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg";//local
 	$ffmpegPath = "ffmpeg";//server
 
