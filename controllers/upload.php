@@ -73,7 +73,7 @@ if(isset($_FILES['file'])){
 
 	if($move){
 		//converts input mp4 to .mov and .ogv
-		shell_exec($to_mp4);
+		// shell_exec($to_mp4);
 		shell_exec($mp4_webm);
 		shell_exec($mp4_mov);
 		shell_exec($mp4_ogv);
