@@ -45,7 +45,7 @@ if(isset($_FILES['file'])){
 
 
 	//ffmpeg shell scripts -acodec aac -strict -2
-	$to_mp4 = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . ' -vcodec h264 ' . $sitePath . 'uploads/' . $filename . '.mp4 2>&1';
+	$to_mp4 = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . ' -vcodec h264 -acodec aac ' . $sitePath . 'uploads/' . $filename . '.mp4 2>&1';
 	$to_webm = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . '  -vcodec libvpx -acodec libvorbis  ' . $sitePath . 'uploads/' . $filename . '.WebM 2>&1';
 	$to_mov = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . ' -acodec copy -vcodec copy -f mov ' . $sitePath . 'uploads/' . $filename . '.mov 2>&1';
 	$to_ogv = $ffmpeg2theoraPath . ' ' . $sitePath . 'uploads/' . $filename . $format;
