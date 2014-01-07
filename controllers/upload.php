@@ -16,9 +16,12 @@ if(isset($_FILES['file'])){
 	$string = str_replace(' ', '', $_FILES['file']);
 	$string = str_replace('&', '', $string);
 
+	// $sitePath = "/Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/";//local
+	$sitePath = "/var/www/";//server
+
 	$file = $string;
 	$tempfile = $file["tmp_name"];
-	$dir = "/var/www/uploads/".$file['name'];
+	$dir = $sitePath . "uploads/".$file['name'];
 
 	//grabs file from temp, saves to server
 	$move = move_uploaded_file($tempfile,$dir);
@@ -31,25 +34,26 @@ if(isset($_FILES['file'])){
 	//after file has uploaded, ffmpeg converts mp4 in uploads directory
 	//to various formats, saving them in their proper directory.
 	$filename = substr($file['name'], 0, -4);
+	$format = substr($file['name'], -4); //grabs uploaded video format
 	// $ffmpegPath = "/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg";//local
 	$ffmpegPath = "ffmpeg";//server
 	// $ffmpeg2theoraPath = "/usr/local/bin/ffmpeg2theora";//local
 	$ffmpeg2theoraPath = "ffmpeg2theora";//server
-	// $sitePath = "/Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/";//local
-	$sitePath = "/var/www/";//server
+	
+
 
 	//ffmpeg shell scripts
-	// $mp4_water = '/Users/adamgedney/ffmpeg/ffmpeg/ffmpeg -i /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/' . $filename . '.mp4 -y /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/images/logo.png -filter_complex overlay /Users/adamgedney/Documents/_Projects/Suprvideo/Code/Site/' . $filename . '.mp4 2>&1';
-	$mp4_webm = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4  -vcodec libvpx -acodec libvorbis  ' . $sitePath . 'uploads/' . $filename . '.WebM 2>&1';
-	$mp4_mov = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -acodec copy -vcodec copy -f mov ' . $sitePath . 'uploads/' . $filename . '.mov 2>&1';
-	$mp4_ogv = $ffmpeg2theoraPath . ' ' . $sitePath . 'uploads/' . $filename . '.mp4';
-	$mp4_flv = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -ar 44100 -ab 96 -f flv ' . $sitePath . 'uploads/' . $filename . '.flv 2>&1';
-	$mp4_mp3 = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -vn -ar 44100 -ac 2 -ab 192 -f mp3 ' . $sitePath . 'uploads/' . $filename . '.mp3 2>&1';
+	$to_mp4 = $ffmpegPath . ' -i' . $sitePath . 'uploads/' . $filename . $format . '-ar 22050 ' . $filename . 'mp4';
+	$mp4_webm = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . '  -vcodec libvpx -acodec libvorbis  ' . $sitePath . 'uploads/' . $filename . '.WebM 2>&1';
+	$mp4_mov = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . ' -acodec copy -vcodec copy -f mov ' . $sitePath . 'uploads/' . $filename . '.mov 2>&1';
+	$mp4_ogv = $ffmpeg2theoraPath . ' ' . $sitePath . 'uploads/' . $filename . $format;
+	$mp4_flv = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . ' -ar 44100 -ab 96 -f flv ' . $sitePath . 'uploads/' . $filename . '.flv 2>&1';
+	$mp4_mp3 = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . ' -vn -ar 44100 -ac 2 -ab 192 -f mp3 ' . $sitePath . 'uploads/' . $filename . '.mp3 2>&1';
 	// $mp4_jpgPoster = $ffmpegPath . ' -ss 00:00:02 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -frames:v 1 ' . $sitePath . 'uploads/poster/' . $filename . '.jpg 2>&1';
-	$mp4_jpgPoster = $ffmpegPath . ' -ss 00:00:02 -t 00:00:07 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '.jpg 2>&1';
-	$mp4_jpgShot1 = $ffmpegPath . ' -ss 00:00:03 -t 00:00:05 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '1.jpg 2>&1';
-	$mp4_jpgShot2 = $ffmpegPath . ' -ss 00:00:06 -t 00:00:09 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '2.jpg 2>&1';
-	$mp4_jpgShot3 = $ffmpegPath . ' -ss 00:00:10 -t 00:00:15 -i ' . $sitePath . 'uploads/' . $filename . '.mp4 -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '3.jpg 2>&1';
+	$mp4_jpgPoster = $ffmpegPath . ' -ss 00:00:02 -t 00:00:07 -i ' . $sitePath . 'uploads/' . $filename . $format . ' -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '.jpg 2>&1';
+	$mp4_jpgShot1 = $ffmpegPath . ' -ss 00:00:03 -t 00:00:05 -i ' . $sitePath . 'uploads/' . $filename . $format . ' -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '1.jpg 2>&1';
+	$mp4_jpgShot2 = $ffmpegPath . ' -ss 00:00:06 -t 00:00:09 -i ' . $sitePath . 'uploads/' . $filename . $format . ' -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '2.jpg 2>&1';
+	$mp4_jpgShot3 = $ffmpegPath . ' -ss 00:00:10 -t 00:00:15 -i ' . $sitePath . 'uploads/' . $filename . $format . ' -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '3.jpg 2>&1';
 
 
 	//file paths
@@ -69,6 +73,7 @@ if(isset($_FILES['file'])){
 
 	if($move){
 		//converts input mp4 to .mov and .ogv
+		shell_exec($to_mp4);
 		shell_exec($mp4_webm);
 		shell_exec($mp4_mov);
 		shell_exec($mp4_ogv);
