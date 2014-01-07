@@ -43,7 +43,7 @@ if(isset($_FILES['file'])){
 
 
 	//ffmpeg shell scripts
-	$to_mp4 = $ffmpegPath . ' -i' . $sitePath . 'uploads/' . $filename . $format . '-ar 22050 ' . $filename . 'mp4';
+	$to_mp4 = $ffmpegPath . ' -i' . $sitePath . 'uploads/' . $filename . $format . ' -ar 22050 ' . $filename . 'mp4';
 	$mp4_webm = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . '  -vcodec libvpx -acodec libvorbis  ' . $sitePath . 'uploads/' . $filename . '.WebM 2>&1';
 	$mp4_mov = $ffmpegPath . ' -i ' . $sitePath . 'uploads/' . $filename . $format . ' -acodec copy -vcodec copy -f mov ' . $sitePath . 'uploads/' . $filename . '.mov 2>&1';
 	$mp4_ogv = $ffmpeg2theoraPath . ' ' . $sitePath . 'uploads/' . $filename . $format;
