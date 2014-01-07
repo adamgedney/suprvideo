@@ -56,7 +56,7 @@ if(isset($_FILES['file'])){
 	$mp4_jpgShot3 = $ffmpegPath . ' -ss 00:00:10 -t 00:00:15 -i ' . $sitePath . 'uploads/' . $filename . $format . ' -r 0.3 ' . $sitePath . 'uploads/shots/' . $filename . '3.jpg 2>&1';
 
 
-	//file paths
+	//file paths ..
 	$webm = "uploads/". $filename . ".WebM";
 	$mp4 = "uploads/". $filename . ".mp4";
 	$mov = "uploads/". $filename . ".mov";
