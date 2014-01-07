@@ -50,7 +50,7 @@ Class Model_Video{
 
 	function add_Video($webm, $mp4, $mov, $ogv, $flv, $mp3, $shot1, $shot2, $shot3, $poster, $title){
 
-		// $db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
+		// .. $db = new PDO("mysql:hostname=localhost;dbname=SuprVideo","root","root");
 		$db = new PDO("mysql:hostname=suprvideo;dbname=SuprVideo","root","bhangra1");
 
 
