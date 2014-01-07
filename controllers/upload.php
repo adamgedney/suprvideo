@@ -21,7 +21,7 @@ if(isset($_FILES['file'])){
 
 	$file = $string;
 	$tempfile = $file["tmp_name"];
-	$dir = $sitePath . "uploads/".$file['name'];
+	$dir = "/var/www/uploads/".$file['name'];
 
 	//grabs file from temp, saves to server
 	$move = move_uploaded_file($tempfile,$dir);
